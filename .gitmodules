@@ -1,3 +1,6 @@
 [submodule "yadm"]
 	path = yadm
 	url = https://github.com/dopplgangr/yadm.git
+[submodule "vim/dein.vim"]
+	path = vim/dein.vim
+	url = https://github.com/Shougo/dein.vim.git
