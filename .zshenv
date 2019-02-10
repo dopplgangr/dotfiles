@@ -9,7 +9,7 @@ export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
 export TERM="$([[ $TMUX ]] && echo 'screen-256color' || echo 'xterm-256color')"
 export EDITOR="vim"
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rvm/bin:./node_modules/.bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
 export PROMPT='%B%F{white}%~%f%b $(_git_status)› '
 
 export GPG_TTY=$(tty)
