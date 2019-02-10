@@ -1,0 +1,4 @@
+cd ~
+git clone https://github.com/dopplgangr/dotfiles.git .
+git submodule update --init --recursive
+export PATH=~/.local/share/yadm/:$PATH
