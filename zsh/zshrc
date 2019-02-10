@@ -1,3 +1,9 @@
+if [[ -f /usr/share/zplug/init.zsh ]]; then
+  export ZPLUG_LOADFILE="${HOME}/.zplug/packages.zsh"
+  source /usr/share/zplug/init.zsh
+  zplug load
+fi
+
 bindkey -v
 unsetopt beep                                           # Turn off bell noise
 
@@ -16,6 +22,7 @@ bindkey "^$terminfo[kcbt]" reverse-menu-complete
 zstyle ':completion:*' menu select
 zstyle ':completion:*' special-dirs true
 autoload -Uz compinit && compinit
+
 setopt prompt_subst
 setopt inc_append_history
 setopt share_history
@@ -28,20 +35,3 @@ _git_status() {
 }
 
 eval $(gpg-agent --daemon --quiet --enable-ssh-support >/dev/null 2>&1)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-export GPG_TTY=$(tty)
-export PROMPT='%B%F{white}%~%f%b $(_git_status)› '
-export HISTSIZE=10000
-export SAVEHIST=10000
-export HISTFILE=~/.zsh_history
-export CLICOLOR_FORCE=1
-export KEYTIMEOUT=1
-export TERM="$([[ $TMUX ]] && echo 'screen-256color' || echo 'xterm-256color')"
-export EDITOR="vim"
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rvm/bin:./node_modules/.bin:$PATH"
-[[ "$(uname)" == "Darwin" ]] && alias ls='ls -G' || alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
