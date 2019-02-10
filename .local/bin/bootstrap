@@ -1,6 +1,7 @@
 cd ~
 git init .
 git remote add origin git@github.com:dopplgangr/dotfiles.git
-git pull origin master
+git fetch --all
+git reset --hard origin/master
 source ~/.zshrc
 yadm clone git@github.com:dopplgangr/dotfiles.git
