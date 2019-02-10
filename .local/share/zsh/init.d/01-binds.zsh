@@ -22,21 +22,21 @@ bindkey "^U" backward-kill-line
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
-if [[ -z "${terminfo[kcbt]}" ]]; then
+if [[ -n "${terminfo[kcbt]}" ]]; then
   bindkey "^${terminfo[kcbt]}" reverse-menu-complete
 fi
 
-if [[ -z "${terminfo[kLFT5]}" ]]; then
+if [[ -n "${terminfo[kLFT5]}" ]]; then
   bindkey "^${terminfo[kLFT5]}" backward-word
 fi
 
-if [[ -z "${terminfo[kRIT5]}" ]]; then
+if [[ -n "${terminfo[kRIT5]}" ]]; then
   bindkey "^${terminfo[kRIT5]}" forward-word
 fi
 
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
 
-if [[ "${terminfo[kdch1]}" != "" ]]; then
+if [[ -n "${terminfo[kdch1]}" ]]; then
   bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
 else
   bindkey "^[[3~" delete-char

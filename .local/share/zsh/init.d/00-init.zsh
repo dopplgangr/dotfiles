@@ -7,6 +7,8 @@ if [[ -f ~/.local/share/zplug/init.zsh ]]; then
   zplug load
 fi
 
+source ~/.local/share/common.sh
+
 zstyle ':completion:*' menu select
 zstyle ':completion:*' special-dirs true
 autoload -Uz compinit && compinit
