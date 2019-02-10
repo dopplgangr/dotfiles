@@ -1,5 +1,5 @@
-if [[ -f /usr/share/zplug/init.zsh ]]; then
-  source /usr/share/zplug/init.zsh
+if [[ -f ~/.local/share/zplug/init.zsh ]]; then
+  source ~/.local/share/zplug/init.zsh
   zplug "zsh-users/zsh-autosuggestions"
   zplug "zsh-users/zsh-completions"
   zplug "zsh-users/zsh-history-substring-search", defer:2

@@ -4,3 +4,6 @@
 [submodule "vim/dein.vim"]
 	path = .local/share/vim/dein.vim
 	url = https://github.com/Shougo/dein.vim.git
+[submodule ".local/share/zplug"]
+	path = .local/share/zplug
+	url = https://github.com/zplug/zplug.git
