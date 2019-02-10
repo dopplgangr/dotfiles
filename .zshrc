@@ -4,6 +4,11 @@ if [[ -f /usr/share/zplug/init.zsh ]]; then
   zplug load
 fi
 
+
+for include in ~/.local/share/zsh/init.d/*; do
+  echo "$include"
+done
+
 bindkey -v
 unsetopt beep                                           # Turn off bell noise
 
