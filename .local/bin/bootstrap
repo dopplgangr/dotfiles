@@ -1,4 +1,5 @@
 cd ~
-git clone https://github.com/dopplgangr/dotfiles.git.
-git submodule update --init --recursive
+git init .
+git remote add origin https://github.com/dopplgangr/dotfiles.git
+git pull origin master
 export PATH=~/.local/share/yadm/:$PATH
