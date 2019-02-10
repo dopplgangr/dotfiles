@@ -1,0 +1,14 @@
+.bash_history
+.bash_logout
+.bashrc
+.gnupg/
+.lesshst
+.profile
+.ssh/
+.sudo_as_admin_successful
+.vim/
+.viminfo
+.zcompdump
+.zplug/
+.zsh_history
+.yadm/
