@@ -2,6 +2,7 @@
 [[ -o nointeractive ]] && return
 
 # Process init directory
-for include in ~/.local/share/zsh/init.d/*; do
+for include in ~/.local/share/zsh/init.d/* ; do
   source "$include"
+  echo "Loaded: $include"
 done
