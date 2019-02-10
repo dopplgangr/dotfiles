@@ -1,7 +1,6 @@
 cd ~
 git init .
-git remote  add origin git@github.com:dopplgangr/dotfiles.git
+git remote add origin git@github.com:dopplgangr/dotfiles.git
 git submodule update --init --recursive
 ~/.local/share/yadm/yadm clone git@github.com:dopplgangr/dotfiles.git --rebase -f
 ln -nfs ~/.local/share/yadm/yadm ~/.local/bin/yadm
-source ~/.zshrc 
