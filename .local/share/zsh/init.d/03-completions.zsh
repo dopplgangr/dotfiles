@@ -35,6 +35,9 @@ zstyle ':completion:*:paths' squeeze-slashes false
 # Enter 'menu selection' if there are at least 2 choices while completing
 zstyle ':completion:*' menu select=2
 
+# what does this do
+zstyle ':completion:*' special-dirs true
+
 # avoid editing certain files in vim
 zstyle ':completion:*:*:(vi|vim):*:*' \
     file-patterns '*~(*.o|*~|*.old|*.bak|*.pro|*.zwc|*.swp):regular-files' \
@@ -54,6 +57,6 @@ zstyle ':completion:*:*:kill:*' force-list always
 
 # Enable caching
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ${ZDOTDIR}/.zcache
+#zstyle ':completion:*' cache-path ${ZDOTDIR}/.zcache
 zstyle ':completion:*' list-prompt %S%L -- More --%s
 zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
