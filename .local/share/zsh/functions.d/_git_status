@@ -1,4 +1,5 @@
-if $( git rev-parse --git-dir > /dev/null 2>&1); then 
-  git rev-parse --abbrev-ref HEAD > /dev/null 2>&1 && \
-    echo "%F{white}[git:$(git rev-parse --abbrev-ref HEAD)] $(git diff --no-ext-diff --quiet --exit-code && echo '✔' || echo '✗')%f "
+if [ $( git rev-parse --git-dir > /dev/null 2>&1) ]; then 
+  _git_prompt_abbrev=$(git rev-parse --abbrev-ref HEAD)
+  _git_prompt_status=$(git diff --no-ext-diff --quiet --exit-code && echo '✔' || echo '✗')
+  echo "%F{white}[git:${_git_prompt_abbrev}] ${_git_prompt_status}%f "
 fi
