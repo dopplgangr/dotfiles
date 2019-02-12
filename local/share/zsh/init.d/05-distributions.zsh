@@ -1,7 +1,6 @@
 # check for intel opt package
-if [[ -d /opt/intel/vtune_amplifier ]]; then
-	# Add quiet flag to shut up that annoying message
-	source /opt/intel/vtune_amplifier/amplxe-vars.sh "quiet"
+if [[ -d /opt/intel/parallel_studio_xe_2018/ ]]; then
+  source /opt/intel/parallel_studio_xe_2018/psxevars.sh &> /dev/null
 fi
 
 if [[ $(lsb_release -is) == "CentOS" ]]; then
@@ -9,7 +8,9 @@ if [[ $(lsb_release -is) == "CentOS" ]]; then
   # CentOS specific features
   #
 
-  # check for alternative git
+  # alternative git
   [[ -f /opt/rh/rh-git29/enable ]] && source /opt/rh/rh-git29/enable
+
+  # alternative python
   [[ -f /opt/rh/rh-python36/enable ]] && source /opt/rh/rh-python36/enable
 fi
