@@ -1,9 +1,9 @@
 [submodule "yadm"]
-	path = .local/share/yadm
+	path = local/share/yadm
 	url = https://github.com/dopplgangr/yadm.git
 [submodule "vim/dein.vim"]
-	path = .local/share/vim/dein.vim
+	path = local/share/vim/dein.vim
 	url = https://github.com/Shougo/dein.vim.git
 [submodule ".local/share/zplug"]
-	path = .local/share/zplug
+	path = local/share/zplug
 	url = https://github.com/zplug/zplug.git

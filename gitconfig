@@ -1,0 +1,46 @@
+[diff]
+	tool = vimdiff
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+    prompt = true
+
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd -J'
+
+[alias]
+    ls           = "!git status -suno"
+    ls-modified  = "!git status --porcelain -uno | awk 'match($1, /M/) {print $2}'"
+    ls-added     = "!git status --porcelain -uno | awk 'match($1, /A/) {print $2}'"
+    ls-deleted   = "!git status --porcelain -uno | awk 'match($1, /D/) {print $2}'"
+    ls-renamed   = "!git status --porcelain -uno | awk 'match($1, /R/) {print $2}'"
+    ls-copied    = "!git status --porcelain -uno | awk 'match($1, /C/) {print $2}'"
+    ls-updated   = "!git status --porcelain -uno | awk 'match($1, /U/) {print $2}'"
+    ls-staged    = "!git status --porcelain -uno | grep -P '^[MA]' | awk '{ print $2 }'"
+    ls-untracked = "!git status --porcelain -uall | awk '$1 == \"??\" {print $2}'"
+
+    graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    lsc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    llc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    filelog = log -u
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+
+[user]
+	email = dopplgangr@gmail.com
+	name = dopplgangr
+
+[includeIf "gitdir:~/projects/"]
+  path = ~/.git/gitconfig.home
+
+[includeIf "gitdir:~/workspace/"]
+	path = ~/.git/gitconfig.work
+
+[include]
+    path = ~/.gitconfig.local 
+
+[core]
+	editor = nvim

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+	key="$1"
+	case $key in
+		-r|--remove)
+			remove=1
+			shift
+			;;
+		*)    # unknown option
+			POSITIONAL+=("$1") # save it in an array for later
+			shift # past argument
+			;;
+	esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+source yaml.sh
+create_variables files.yml
+
+cd ~
+nr=${#dotfiles__src[@]}
+for (( i=0; i<$nr; i++ )); do
+	src="$(readlink -f ${dotfiles__src[$i]})"
+	dst="${dotfiles__dst[$i]}"
+	desc="${dotfiles__desc[$i]}"
+	# interactive prompt
+	if [[ ${remove} ]]; then
+		if [[ -h ${dst} ]]; then
+			echo "uninstalling $dst"
+			rm "${dst}"
+		fi
+	else
+		ln -i -s "${src}" ${dst}
+	fi
+
+done

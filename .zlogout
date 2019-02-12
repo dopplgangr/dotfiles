@@ -1,0 +1,1 @@
+/home/ctodie/dotfiles/zlogout
