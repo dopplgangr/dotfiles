@@ -1,6 +1,6 @@
 # check for intel opt package
 if [[ -d /opt/intel/parallel_studio_xe_2018/ ]]; then
-	source /opt/intel/parallel_studio_xe_2018/amplxe-vars.sh > /dev/null 2>&1 
+  source /opt/intel/parallel_studio_xe_2018/psxevars.sh &> /dev/null
 fi
 
 if [[ $(lsb_release -is) == "CentOS" ]]; then
