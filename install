@@ -1,38 +1,195 @@
 #!/usr/bin/env bash
 
+resolve_script_dir() {
+  SOURCE="${BASH_SOURCE[0]}"
+  while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  echo "$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+}
+
+check_tty() {
+	if test -t 1; then # is a tty
+    log_debug "output targets tty"
+		ncolors=$(tput colors)
+    log_debug "ncolors: ${ncolors}"
+		if test -n "$ncolors" && test $ncolors -ge 8; then
+			bold="$(tput bold)"
+      underline="$(tput smul)"
+      standout="$(tput smso)"
+      normal="$(tput sgr0)"
+      black="$(tput setaf 0)"
+      red="$(tput setaf 1)"
+      green="$(tput setaf 2)"
+      yellow="$(tput setaf 3)"
+      blue="$(tput setaf 4)"
+      magenta="$(tput setaf 5)"
+      cyan="$(tput setaf 6)"
+      white="$(tput setaf 7)"
+		fi
+  else # not a tty
+    log_debug "tty not found, skipping colors"
+	fi
+}
+
+log_info() {
+	echo "${white}$@${normal}"
+}
+
+log_error() {
+  echo "${red}error:${normal} $@"
+}
+
+log_warning() {
+	echo "${yellow}warning:${normal} $@"
+}
+
+log_debug() {
+  [[ ${verbose} ]] || return
+	echo "${magenta}debug:${normal} $@"
+}
+
+remove_link() {
+  local file=$1
+
+  if [[ ! -e "${file}" ]]; then
+    log_error "file doesn't exist: ${file}"
+    return
+  fi
+
+	if [[ -L "${file}" ]]; then
+		log_info "deleting symlink: ${file}"
+		rm "${file}"
+  else 
+    log_error "unhandled file type: ${file}"
+	fi
+}
+
+uninstall() {
+  local manifest=$1
+	local link=$2
+
+  # if it's a directory we should descend and handle individual files
+  if [[ -d "${link}" ]]; then
+    log_debug "expanding dir manifest"
+    for file in $(expand_dir ${manifest}); do
+      local subs="$link/${file#${manifest}}"
+      log_debug "deleting symlink: ${subs}"
+      remove_link "${subs}"
+    done
+  else
+    remove_link "${link}"
+  fi
+}
+
+expand_dir() {
+  local dir=$1
+  find "${dir}" -type f -print
+}
+
+make_dir() {
+  local dir=$1
+  if [[ ! -d ${dir} ]]; then
+    log_debug "creating directory: ${dir}"
+    mkdir --parents "${dir}"
+  fi
+}
+
+prompt_link() {
+  local src=$1
+  local dst=$2
+  log_info "linking ${src} -> ${dst}"
+  ln -i -s "${src}" "${dst}"
+}
+
+install() {
+	local src=$1
+	local dst=$2
+
+  # handle directories gracefully
+  # assuming they already exist
+  # or contain data
+  if [[ -d "${src}" ]]; then
+    log_debug "found directory target ${src} -> ${dst}"
+
+    # iterate over the actual files not directories
+    for file in $(expand_dir ${src}); do
+      # create the output path for each file
+      local subs="${dst}/${file#${src}}"
+
+      # grab the output directory
+      local dir="$(dirname "${subs}")"
+
+      if [[ -h "${dir}" ]]; then
+        # we can skip because the dir already exists
+        debug_log "directory ${dir} is symlink, skipping..."
+      else
+        # create any directories we need
+        make_dir "${dir}"
+      fi
+      prompt_link "${file}" "${subs}"
+    done
+  else
+    prompt_link "${src}" "${dst}"
+  fi
+}
+
+
+main() {
+check_tty
+source yaml.sh
+create_variables files.yml
+
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
 	key="$1"
 	case $key in
-		-r|--remove)
-			remove=1
-			shift
-			;;
-		*)    # unknown option
-			POSITIONAL+=("$1") # save it in an array for later
-			shift # past argument
-			;;
+
+	-r|--remove)
+	remove=1
+  log_debug "uninstall action requested"
+	shift
+	;;
+
+  -f|--force)
+  force=1
+  shift
+  ;;
+
+	-v|--verbose)
+	verbose=1
+  log_debug "verbose mode enabled"
+	shift
+	;;
+
+	*)    # unknown option
+	POSITIONAL+=("$1") # save it in an array for later
+	shift # past argument
+	;;
+
 	esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-source yaml.sh
-create_variables files.yml
+script_dir=$(resolve_script_dir)
+log_debug "${script_dir}"
 
-cd ~
+log_info "operating on: ${HOME}"
 nr=${#dotfiles__src[@]}
 for (( i=0; i<$nr; i++ )); do
-	src="$(readlink -f ${dotfiles__src[$i]})"
-	dst="${dotfiles__dst[$i]}"
+	src="${script_dir}/${dotfiles__src[$i]}" 
+  dst="${HOME}/${dotfiles__dst[$i]}"
 	desc="${dotfiles__desc[$i]}"
 	# interactive prompt
 	if [[ ${remove} ]]; then
-		if [[ -h ${dst} ]]; then
-			echo "uninstalling $dst"
-			rm "${dst}"
-		fi
+			uninstall "${src}" "${dst}"
 	else
-		ln -i -s "${src}" ${dst}
+			install "${src}" "${dst}"
 	fi
-
 done
+}
+
+main "$@"
+

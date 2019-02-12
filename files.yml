@@ -29,4 +29,8 @@ dotfiles:
     src: vimrc
     dst: .vimrc
     desc: vim configs
+  -
+    src: local
+    dst: .local
+    desc: user local directory
 --
