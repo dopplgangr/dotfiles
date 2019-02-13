@@ -67,7 +67,7 @@ set clipboard=unnamed,unnamedplus	" enable clipboard
 set encoding=utf-8                      " enable utf-8 support
 set hidden				" hide buffers, don't close
 set number				" show line numbers
-set term=xterm-256color                 " terminal type
+"set term=xterm-256color                 " terminal type
 set wildmenu wildmode=longest:full,full " wildmenu settings
 set wildcharm=<Tab>                     " wildmenu character
 set showcmd                             " show command keys
