@@ -1,7 +1,7 @@
 " Plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -27,9 +27,14 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='monochrome'
 let g:airline_powerline_fonts=1
 
-if has('nvim')
 Plug 'ludovicchabant/vim-gutentags'
-endif
+set statusline+=%{gutentags#statusline()}
+
+" YAML syntax
+Plug 'stephpy/vim-yaml'
+
+" Ansible syntax 
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 
 " Fuzzy file, buffer, mru, tag, etc finder
@@ -115,11 +120,11 @@ let mapleader=','                                " leader key
 " improved keyboard support for navigation (especially terminal)
 " https://neovim.io/doc/user/nvim_terminal_emulator.html
 if has('nvim')
-tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
 endif
 
 nnoremap <M-h> <C-w>h
@@ -164,24 +169,24 @@ let g:netrw_browse_split=1
 "
 let s:hidden_all = 0
 function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-        TagbarClose
-        NERDTreeClose
-    else
-  set foldcolumn=0
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2 
-        set showcmd
-        NERDTree
-        TagbarOpen
-    endif
+  if s:hidden_all  == 0
+    let s:hidden_all = 1
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+    TagbarClose
+    NERDTreeClose
+  else
+    set foldcolumn=0
+    let s:hidden_all = 0
+    set showmode
+    set ruler
+    set laststatus=2 
+    set showcmd
+    NERDTree
+    TagbarOpen
+  endif
 endfunction
 
 nnoremap <silent> <leader>h :call ToggleHiddenAll()<CR>

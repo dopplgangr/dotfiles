@@ -44,6 +44,9 @@ zstyle ':completion:*:*:(vi|vim):*:*' \
                   '(*~|*.bak|*.old):backup-files' \
                   '(*.o|*.pro|*.zwc|*.swp):hidden-files'
 
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%
+[# ]*}//,/ })'
+
 # Use colors in tab completion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 

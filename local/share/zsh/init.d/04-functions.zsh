@@ -5,3 +5,12 @@ if [[ -d ${DOTFILES_ZSH_FUNCTIONS} ]]; then
     autoload -Uz "${func}"
   done
 fi
+
+DOTFILES_COMMON_FUNCTIONS=~/.local/share/shell/functions.d
+if [[ -d ${DOTFILES_COMMON_FUNCTIONS} ]]; then
+	fpath=( "${DOTFILES_COMMON_FUNCTIONS}" "${fpath[@]}" )
+	for func in ${DOTFILES_COMMON_FUNCTIONS}/*(:t); do
+		echo "sourcing function:"
+		source "${func}"
+	done
+fi
