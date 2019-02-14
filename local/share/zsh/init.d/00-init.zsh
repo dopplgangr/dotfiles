@@ -19,10 +19,12 @@ zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, 
 # module order
 SPACESHIP_PROMPT_ORDER=(
 	host
-	char
 	dir
 	git
 	docker
+  exit_code
+  exec_time
+	char
 )
 
 SPACESHIP_USER_PREFIX=""
