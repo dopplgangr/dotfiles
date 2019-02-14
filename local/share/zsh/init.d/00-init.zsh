@@ -1,4 +1,7 @@
 source ~/.local/share/common.sh
+umask 022
+
+
 
 # Skip zplug initialization if it's not available
 [[ -f ~/.local/share/zplug/init.zsh ]] || return
@@ -8,10 +11,13 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+
+
+autoload is-at-least
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, if: "is-at-least 5.1 ${ZSH_VERSION}"
+
 # module order
 SPACESHIP_PROMPT_ORDER=(
-	user
 	host
 	char
 	dir
@@ -43,4 +49,3 @@ fi
 # Source plugins && add commands to $PATH
 zplug load
 
-umask 022
