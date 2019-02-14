@@ -32,5 +32,9 @@ dotfiles:
   -
     src: local
     dst: .local
-    desc: user local directory
+    desc: user local prefix directory
+  -
+    src: config
+    dst: .config
+    desc: user local config directory
 --
