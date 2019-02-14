@@ -11,6 +11,11 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' completer _oldlist _complete _match \
                                  _expand _prefix _approximate
 
+# Enable caching
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' list-prompt %S%L -- More --%s
+zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
+
 # Don't complete backup files as executables
 zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 
@@ -18,7 +23,9 @@ zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # Match lowercase letters to uppercase letters and dashes to underscores
-zstyle ':completion:*' matcher-list 'm:{a-z-}={A-Z_}' 'r:|.=** r:|=*'
+#zstyle ':completion:*' matcher-list 'm:{a-z-}={A-Z_}' 'r:|.=** r:|=*'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 
 # Try to use verbose listing if possible
 zstyle ':completion:*' verbose true
@@ -27,7 +34,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:paths' expand suffix
 
 # Menu complete on ambiguous paths
-zstyle ':completion:*:paths' list-suffixes true
+#zstyle ':completion:*:paths' list-suffixes true
 
 # Have '/home//<TAB>' list '/home/*' rather than '/home/*/*'
 zstyle ':completion:*:paths' squeeze-slashes false
@@ -53,13 +60,13 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Add a space to expansions
 zstyle ':completion:*:expand:*' add-space true
 
-# Tweaks to kill
+# kill
 zstyle ':completion:*:*:kill:*' command 'ps -u$USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*' force-list always
 
-# Enable caching
-zstyle ':completion:*' use-cache on
-#zstyle ':completion:*' cache-path ${ZDOTDIR}/.zcache
-zstyle ':completion:*' list-prompt %S%L -- More --%s
-zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
+# man
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+

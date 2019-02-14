@@ -12,6 +12,32 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+if has('nvim')
+	Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'pdavydov108/vim-lsp-cquery'
+	if executable('cquery')
+		au User lsp_setup call lsp#register_server({
+					\ 'name': 'cquery',
+					\ 'cmd': {server_info->['cquery']},
+					\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+					\ 'initialization_options': { 'cacheDirectory': '/var/cquery/' },
+					\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+					\ })
+	endif
+endif
+
+
 " Save/restore session support
 "Plug 'tpope/vim-obsession'
 
@@ -27,8 +53,17 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='monochrome'
 let g:airline_powerline_fonts=1
 
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+let g:SuperTabContextDefaultCompletionType = "<c-k>"
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestEnhanced = 1
+
 Plug 'ludovicchabant/vim-gutentags'
-set statusline+=%{gutentags#statusline()}
+"set statusline+=%{gutentags#statusline()}
 
 " YAML syntax
 Plug 'stephpy/vim-yaml'
@@ -119,14 +154,7 @@ let mapleader=','                                " leader key
 
 " improved keyboard support for navigation (especially terminal)
 " https://neovim.io/doc/user/nvim_terminal_emulator.html
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <A-h> <C-\><C-n><C-w>h
-  tnoremap <A-j> <C-\><C-n><C-w>j
-  tnoremap <A-k> <C-\><C-n><C-w>k
-  tnoremap <A-l> <C-\><C-n><C-w>l
-endif
-
+"
 nnoremap <M-h> <C-w>h
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k

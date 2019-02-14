@@ -1,8 +1,6 @@
 source ~/.local/share/common.sh
 umask 022
 
-
-
 # Skip zplug initialization if it's not available
 [[ -f ~/.local/share/zplug/init.zsh ]] || return
 
@@ -12,8 +10,7 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
-
-autoload is-at-least
+autoload -Uz is-at-least
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, if: "is-at-least 5.1 ${ZSH_VERSION}"
 
 # module order
@@ -22,8 +19,7 @@ SPACESHIP_PROMPT_ORDER=(
 	dir
 	git
 	docker
-  exit_code
-  exec_time
+  jobs
 	char
 )
 
