@@ -9,6 +9,12 @@ export KEYTIMEOUT=1
 export EDITOR="vim"
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
+# set up local go env if it exists
+if [ -d ${HOME}/go ]; then 
+  GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$PATH
+fi
+
 alias ls='ls --color=auto'
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
