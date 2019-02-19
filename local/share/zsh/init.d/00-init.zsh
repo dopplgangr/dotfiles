@@ -11,8 +11,8 @@ zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 autoload -Uz is-at-least
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, if: "is-at-least 5.1 ${ZSH_VERSION}"
-
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, if: "is-at-least 5.1"
+if is-at-least 5.1; then
 # module order
 SPACESHIP_PROMPT_ORDER=(
 	host
@@ -36,6 +36,10 @@ SPACESHIP_HOST_SUFFIX=") "
 
 SPACESHIP_DIR_PREFIX='' # disable directory prefix, cause it's not the first section
 SPACESHIP_DIR_TRUNC='1' # show only last directory
+else
+  PROMPT='%n@%m %F{cyan}%~%f $(_git_status)$(_prompt_char) '
+fi
+
 
 
 # Install plugins that haven't been installed
