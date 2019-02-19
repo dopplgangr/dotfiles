@@ -101,7 +101,7 @@ prompt_link() {
   local src=$1
   local dst=$2
   log_info "linking ${src} -> ${dst}"
-  ln -i -s "${src}" "${dst}"
+  ln -i -s ${force:+-f} "${src}" "${dst}"
 }
 
 install() {
