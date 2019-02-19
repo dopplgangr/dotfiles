@@ -124,7 +124,7 @@ install() {
 
       if [[ -h "${dir}" ]]; then
         # we can skip because the dir already exists
-        debug_log "directory ${dir} is symlink, skipping..."
+        log_debug "directory ${dir} is symlink, skipping..."
       else
         # create any directories we need
         make_dir "${dir}"
