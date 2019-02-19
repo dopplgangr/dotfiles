@@ -20,9 +20,6 @@ SPACESHIP_PROMPT_ORDER=(
 	git
 	docker
   jobs
-  line_sep
-  vi_mode
-  jobs
   exit_code
 	char
 )
