@@ -1,4 +1,4 @@
-if [ -d .git ] || [ $(git rev-parse --git-dir > /dev/null 2>&1) ]; then
+if [ -d "$(git rev-parse --git-dir 2>/dev/null)" ]; then
   _git_prompt_abbrev=$(git rev-parse --abbrev-ref HEAD)
   _git_prompt_status=$(git diff --no-ext-diff --quiet --exit-code && echo '%F{green}✔%f' || echo '%F{red}✗')
   echo "on %F{magenta} ${_git_prompt_abbrev} ${_git_prompt_status}%f "
