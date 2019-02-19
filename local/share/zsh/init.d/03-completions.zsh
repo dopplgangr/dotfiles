@@ -1,4 +1,4 @@
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -d $ZPLUG_HOME/zcompdump
 
 # Order in which completion mechanisms will be tried:
 # 1. Try completing the results of an old list
