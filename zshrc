@@ -7,3 +7,5 @@ for include in ~/.local/share/zsh/init.d/* ; do
   source "$include"
 done
 
+# just in case other scripts have messed up our path orders
+source ~/.zshenv
