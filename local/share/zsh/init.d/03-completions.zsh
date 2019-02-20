@@ -1,5 +1,10 @@
-autoload -Uz compinit && compinit -d $ZPLUG_HOME/zcompdump
+DOTFILES_ZSH_COMPLETIONS=~/.local/share/zsh/completions.d
+if [[ -d ${DOTFILES_ZSH_COMPLETIONS} ]]; then
+  fpath+=${DOTFILES_ZSH_COMPLETIONS}
+fi
 
+autoload -U compinit
+compinit -d $ZPLUG_HOME/zcompdump
 # Order in which completion mechanisms will be tried:
 # 1. Try completing the results of an old list
 #    ( for use with history completion on ctrl-space )
