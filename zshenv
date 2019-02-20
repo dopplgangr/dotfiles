@@ -10,7 +10,12 @@ export EDITOR="vim"
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
 alias ls='ls --color=auto'
-alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
+alias la='ls -la --color=auto'
+
 alias grep='grep --color=auto'
 
+alias df="df -Tha --total"
+alias du="du -ach | sort -h"
+alias free="free -mt"
+alias ps="ps auxf"
