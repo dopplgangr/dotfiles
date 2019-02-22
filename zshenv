@@ -6,8 +6,9 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
-export EDITOR="vim"
-export PAGER="less"
+export EDITOR="nvim"
+export PAGER="nvim -R"
+export MANPAGER="nvim -c 'set ft=man' -"
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
 # set up local go env if it exists
@@ -15,6 +16,9 @@ if [ -d ${HOME}/go ]; then
   GOPATH=$HOME/go
   export PATH=$GOPATH/bin:$PATH
 fi
+
+alias vi='nvim'
+alias vim='nvim'
 
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
