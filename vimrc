@@ -11,15 +11,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-
-if has('nvim')
+if has('nvim') && has('python3')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
+elseif has('nvim')
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+  let g:deoplete#enable_at_startup = 1
 endif
-let g:deoplete#enable_at_startup = 1
 
 if has('nvim')
 	Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -38,22 +37,20 @@ if has('nvim')
 endif
 
 
-" Save/restore session support
-"Plug 'tpope/vim-obsession'
+Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-fugitive'            " git wrapper
+Plug 'editorconfig/editorconfig-vim' " enforce editor configs
+Plug 'itchyny/lightline.vim'         " status line
+if !has('gui_running')
+  set t_Co=256
+endif
+let g:lightline = {
+      \ 'colorscheme' : '16color',
+      \ }
 
-" git wrapper
-Plug 'tpope/vim-fugitive'
 
-" Enforce editor configs
-Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'             " tab do all the things
 
-" enhanced status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='monochrome'
-let g:airline_powerline_fonts=1
-
-Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
@@ -128,7 +125,47 @@ set showbreak=¬\                                 " Wrapping character
 set showmatch
 
 " Colors
-hi Normal guibg=NONE ctermbg=NONE|		" transparency fix
+"hi Normal guibg=NONE ctermbg=NONE|		" transparency fix
+hi Search ctermfg=black|              " highlight fix
+hi Error ctermfg=black|
+hi ErrorMsg ctermfg=black|              " highlight fix
+hi PmenuSbar ctermfg=black|
+hi DiffText ctermfg=black|              " highlight fix
+hi Visual ctermfg=black|
+hi CursorColumn ctermfg=black|
+hi Folded ctermfg=lightblue|
+hi NvimInternalError ctermfg=black|
+
+hi LightlineLeft_normal_0 ctermfg=black|
+hi LightlineLeft_normal_1 ctermfg=black|
+hi LightlineLeft_normal_2 ctermfg=black|
+
+hi LightlineLeft_command_0 ctermfg=black|
+
+hi LightlineMiddle_normal ctermfg=black ctermbg=8|
+hi LightlineMiddle_insert ctermfg=black ctermbg=8|
+hi LightlineMiddle_command ctermfg=black ctermbg=8|
+
+hi LightlineRight_normal_0 ctermfg=black ctermbg=11|
+hi LightlineRight_normal_1 ctermfg=black ctermbg=11|
+hi LightlineRight_normal_2 ctermfg=black ctermbg=11|
+hi LightlineRight_normal_3 ctermfg=black ctermbg=11|
+
+hi LightlineRight_visual_0 ctermfg=black ctermbg=11|
+hi LightlineRight_visual_1 ctermfg=black ctermbg=11|
+hi LightlineRight_visual_2 ctermfg=black ctermbg=11|
+hi LightlineRight_visual_3 ctermfg=black ctermbg=11|
+
+hi LightlineRight_insert_0 ctermfg=black ctermbg=11|
+hi LightlineRight_insert_1 ctermfg=black ctermbg=11|
+hi LightlineRight_insert_2 ctermfg=black ctermbg=11|
+hi LightlineRight_insert_3 ctermfg=black ctermbg=11|
+
+hi LightlineRight_command_0 ctermfg=black ctermbg=11|
+hi LightlineRight_command_1 ctermfg=black ctermbg=11|
+hi LightlineRight_command_2 ctermfg=black ctermbg=11|
+hi LightlineRight_command_3 ctermfg=black ctermbg=11|
+
 
 " Tabs & Indentation
 set autoindent expandtab
@@ -147,6 +184,7 @@ set undofile undodir=~/.vim/undo undolevels=9999 " undo options
 " Performance Tuning
 set lazyredraw					 " enable lazy redraw
 set nocursorline                                 " disable cursorline          
+set noshowmode
 set ttyfast                                      " enable fast terminal connection
 
 " Key Bindings

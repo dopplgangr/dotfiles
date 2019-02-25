@@ -9,6 +9,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "chriskempson/base16-shell"
 
 autoload -Uz is-at-least
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme, if: "is-at-least 5.1"

@@ -18,5 +18,5 @@ if [[ $(lsb_release -is) == "CentOS" ]]; then
   [[ -f /opt/rh/python27/enable ]] && source /opt/rh/python27/enable
 
   # alternative gcc
-  [[ -f /opt/rh/devtoolset-7/enable ]] && source /opt/rh/devtoolset-7/enable
+  #[[ -f /opt/rh/devtoolset-7/enable ]] && source /opt/rh/devtoolset-7/enable
 fi
