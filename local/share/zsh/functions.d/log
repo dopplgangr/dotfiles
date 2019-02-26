@@ -83,7 +83,7 @@ log_label () {
 	label="$1$( printf ' %.0s' {0..41} )"
 	shift
 
-	log "${label:0:41}" "$( echo -en '\033[1m' )$*$( echo -en '\033[0m' )"
+	log "${label:0:41}" "${bold}$*${normal}"
 }
 
 
@@ -92,22 +92,22 @@ log_indent_label () {
 	label="$1$( printf ' %.0s' {0..41} )"
 	shift
 
-	log_indent "${label:0:41}" "$( echo -en '\033[1m' )$*$( echo -en '\033[0m' )"
+	log_indent "${label:0:41}" "${bold}$*${normal}"
 }
 
 
 log_debug () {
-	prefix_log "$( echo -en '\033[1m' )   *** DEBUG: " "$*$( echo -en '\033[0m' )"
+	prefix_log "${bold}${magenta}   *** DEBUG: " "$*${normal}"
 }
 
 
 log_warning () {
-	prefix_log "$( echo -en '\033[1m' )   *** WARNING: " "$*$( echo -en '\033[0m' )"
+	prefix_log "${bold}${yellow}   *** WARNING: " "$*${normal}"
 }
 
 
 log_error () {
-	prefix_log "$( echo -en '\033[1m' )   *** ERROR: " "$*$( echo -en '\033[0m' )"
+	prefix_log "${bold}${red}   *** ERROR: " "$*${normal}"
 }
 
 
