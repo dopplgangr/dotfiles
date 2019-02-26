@@ -40,15 +40,7 @@ endif
 Plug 'chriskempson/base16-vim'
 Plug 'tpope/vim-fugitive'            " git wrapper
 Plug 'editorconfig/editorconfig-vim' " enforce editor configs
-Plug 'itchyny/lightline.vim'         " status line
-if !has('gui_running')
-  set t_Co=256
-endif
-let g:lightline = {
-      \ 'colorscheme' : '16color',
-      \ }
-
-
+Plug 'dopplgangr/lightline.vim'         " status line
 Plug 'ervandew/supertab'             " tab do all the things
 
 let g:SuperTabDefaultCompletionType = "context"
@@ -135,37 +127,6 @@ hi Visual ctermfg=black|
 hi CursorColumn ctermfg=black|
 hi Folded ctermfg=lightblue|
 hi NvimInternalError ctermfg=black|
-
-hi LightlineLeft_normal_0 ctermfg=black|
-hi LightlineLeft_normal_1 ctermfg=black|
-hi LightlineLeft_normal_2 ctermfg=black|
-
-hi LightlineLeft_command_0 ctermfg=black|
-
-hi LightlineMiddle_normal ctermfg=black ctermbg=8|
-hi LightlineMiddle_insert ctermfg=black ctermbg=8|
-hi LightlineMiddle_command ctermfg=black ctermbg=8|
-
-hi LightlineRight_normal_0 ctermfg=black ctermbg=11|
-hi LightlineRight_normal_1 ctermfg=black ctermbg=11|
-hi LightlineRight_normal_2 ctermfg=black ctermbg=11|
-hi LightlineRight_normal_3 ctermfg=black ctermbg=11|
-
-hi LightlineRight_visual_0 ctermfg=black ctermbg=11|
-hi LightlineRight_visual_1 ctermfg=black ctermbg=11|
-hi LightlineRight_visual_2 ctermfg=black ctermbg=11|
-hi LightlineRight_visual_3 ctermfg=black ctermbg=11|
-
-hi LightlineRight_insert_0 ctermfg=black ctermbg=11|
-hi LightlineRight_insert_1 ctermfg=black ctermbg=11|
-hi LightlineRight_insert_2 ctermfg=black ctermbg=11|
-hi LightlineRight_insert_3 ctermfg=black ctermbg=11|
-
-hi LightlineRight_command_0 ctermfg=black ctermbg=11|
-hi LightlineRight_command_1 ctermfg=black ctermbg=11|
-hi LightlineRight_command_2 ctermfg=black ctermbg=11|
-hi LightlineRight_command_3 ctermfg=black ctermbg=11|
-
 
 " Tabs & Indentation
 set autoindent expandtab
