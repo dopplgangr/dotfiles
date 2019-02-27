@@ -7,7 +7,7 @@ export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
 export EDITOR="nvim"
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="nvim -R"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
@@ -34,10 +34,13 @@ export LIBRARY_LOG_TIMESTAMP=1
 
 alias vi='nvim'
 alias vim='nvim'
-alias ls='ls -Sh --group-directories-first --color=auto'
-alias ll='ls -Shl --group-directories-first --color=auto'
-alias la='ls -Shla --group-directories-first --color=auto'
-alias lp="ls -Shla --group-directories-first --color=auto | ${PAGER}"
+alias man='~/.local/bin/viman'
+
+
+alias ls='ls -h --sort=extension --group-directories-first --color=auto'
+alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
+alias la='ls -hla --sort=extension --group-directories-first --color=auto'
+alias lp="ls -hla --sort=extension --group-directories-first --color=auto | ${PAGER}"
 alias grep='grep --color=auto'
 alias df="df -Tha --total"
 alias du="du -ach | sort -h"

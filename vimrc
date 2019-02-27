@@ -9,39 +9,19 @@ endif
 call plug#begin('~/.vim/plugged')
 " ------------------------------
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-if has('nvim') && has('python3')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-elseif has('nvim')
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-  let g:deoplete#enable_at_startup = 1
-endif
-
-if has('nvim')
-	Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'pdavydov108/vim-lsp-cquery'
-	if executable('cquery')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'cquery',
-					\ 'cmd': {server_info->['cquery']},
-					\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-					\ 'initialization_options': { 'cacheDirectory': '/var/cquery/' },
-					\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-					\ })
-	endif
-endif
-
-
-Plug 'chriskempson/base16-vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'   " nerdtree git icons
 Plug 'tpope/vim-fugitive'            " git wrapper
 Plug 'editorconfig/editorconfig-vim' " enforce editor configs
-Plug 'dopplgangr/lightline.vim'         " status line
 Plug 'ervandew/supertab'             " tab do all the things
+Plug 'godlygeek/tabular'  
+Plug 'plasticboy/vim-markdown'       " Markdown support  
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'stephpy/vim-yaml'              " yaml syntax support
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
+Plug 'benmills/vimux' 
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'  " better grepping ( source code aware )
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -51,58 +31,29 @@ let g:SuperTabContextDefaultCompletionType = "<c-k>"
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabLongestEnhanced = 1
 
-Plug 'ludovicchabant/vim-gutentags'
-"set statusline+=%{gutentags#statusline()}
-
-" YAML syntax
-Plug 'stephpy/vim-yaml'
-
-" Ansible syntax 
-Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 
-" Fuzzy file, buffer, mru, tag, etc finder
-" ctrlp.vim
-" https://github.com/ctrlpvim/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
 
-" better grepping ( source code aware )
-Plug 'mileszs/ack.vim'
-" use ag instead of default
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --nogroup --nocolor --column' " use ag instead of default
 
-" Markdown support
-" https://github.com/plasticboy/vim-markdown
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-" TagBar
-Plug 'majutsushi/tagbar'
-
-" TMUX integration
-Plug 'benmills/vimux'
 " ------------------------------
 call plug#end()
 " ==============================
 
 " Basic
-set nocompatible
 set autoread				" relead on external file changes
 set backspace=indent,eol,start		" backspace behavior
 set clipboard=unnamed,unnamedplus	" enable clipboard
 set encoding=utf-8                      " enable utf-8 support
 set hidden				" hide buffers, don't close
 set number				" show line numbers
-"set term=xterm-256color                 " terminal type
 set wildmenu wildmode=longest:full,full " wildmenu settings
 set wildcharm=<Tab>                     " wildmenu character
 set showcmd                             " show command keys
 set splitbelow splitright
-"set autochdir                          " switch to files local directory
-
 
 " UI
 filetype on
@@ -148,16 +99,26 @@ set nocursorline                                 " disable cursorline
 set noshowmode
 set ttyfast                                      " enable fast terminal connection
 
+" Tags
+set tags+=tags
+set tags+=../tags
+set tags+=~/.tags
+set tags+=~/.local/share/tags
+
 " Key Bindings
 let mapleader=','                                " leader key
 
 " improved keyboard support for navigation (especially terminal)
 " https://neovim.io/doc/user/nvim_terminal_emulator.html
 "
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Quick edit config files
+nnoremap <leader>ev :edit ~/.vimrc<CR>|
+nnoremap <leader>et :edit ~/.tmux.conf<CR>|
 
 nnoremap <leader>, :let @/=''<CR>:noh<CR>|       " clear search
 nnoremap <silent> <leader># :g/\v^(#\|$)/d_<CR>| " delete commented blank lines
@@ -168,7 +129,8 @@ nnoremap <leader>m :marks<CR>|                   " list marks
 nnoremap <leader>p :set invpaste paste?<CR>|     " toggle paste mode
 nnoremap <leader>s :retab<CR>|                   " convert tabs to space
 nnoremap <leader>r :source $MYVIMRC<CR>|          " reload .vimrc
-nnoremap <leader>e :edit $MYVIMRC<CR>|
+
+
 nnoremap <silent> <leader>t :%s/\+$//e|          " trim whitespace            
 nnoremap <leader>o :edit<space><Tab>|            " open buffer
 nnoremap <leader>x :bd<CR>|                      " close buffer
@@ -187,13 +149,6 @@ cnoreabbrev w!! w !sudo tee > /dev/null %|       " write file with sudo
 let g:netrw_banner=0
 let g:netrw_browse_split=1
 
-
-" Autocomplete Settings
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-"
 let s:hidden_all = 0
 function! ToggleHiddenAll()
   if s:hidden_all  == 0
