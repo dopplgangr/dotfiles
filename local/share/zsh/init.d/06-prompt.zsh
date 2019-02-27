@@ -3,7 +3,11 @@ _prompt_host="%m"
 _prompt_user="%n"
 
 _prompt_status() {
-  echo " ${_prompt_char}"
+  if [[ $? -eq 0 ]]; then
+    printf " %%F{green}%s%%f" "${_prompt_char}"
+  else
+    printf " %%F{red}%s%%f" "${_prompt_char}"
+  fi
 }
 
 _git_prompt_abbrev() {
@@ -11,7 +15,7 @@ _git_prompt_abbrev() {
 }
 
 _git_prompt_stash() {
-  if git stash list | wc -l 
+  [[ -n "$(git stash list)" ]] && return 0 || return 1
 }
 
 _git_prompt_modified() {
@@ -29,12 +33,20 @@ _prompt_git() {
     mods+=("!")
   fi
 
-  local modified=""
-  if [[ ${#mods[@]} -gt 0 ]]; then
-    modified=" [%F{red}${mods[@]}%f]"
+  if _git_prompt_stash; then
+    mods+=("$")
   fi
 
-  echo -n " on %F{magenta} $(_git_prompt_abbrev)%f${modified}"
+  local modified=""
+  if [[ ${#mods[@]} -gt 0 ]]; then
+    local symbols
+    printf -v symbols "%s" "${mods[@]}"
+    modified=" [%F{red}${symbols}%f]"
+  fi
+
+  printf " on %s%s" \
+    "%F{magenta} $(_git_prompt_abbrev)%f" \
+    "${modified}"
 }
 
 # Note: all prompt components are responsible for their own left space padding if applicable
