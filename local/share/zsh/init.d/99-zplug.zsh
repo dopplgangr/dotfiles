@@ -12,10 +12,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "dopplgangr/base16-shell"
 
-# PROMPT='%n@%m %F{cyan}%~%f $(_git_status)$(_prompt_char) '
-
-
-
 # Install plugins that haven't been installed
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "

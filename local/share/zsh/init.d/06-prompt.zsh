@@ -7,7 +7,7 @@ _prompt_status() {
 }
 
 _git_prompt_abbrev() {
-  echo "$(git rev-parse --abbrev-ref HEAD)"
+  git rev-parse --abbrev-ref HEAD
 }
 
 _git_prompt_modified() {
