@@ -21,11 +21,11 @@ fi
 DOTFILES_ZSH_FUNCTIONS=~/.local/share/zsh/functions.d
 if [[ -d ${DOTFILES_ZSH_FUNCTIONS} ]]; then
   fpath+="${DOTFILES_ZSH_FUNCTIONS}"
-  for func in ${DOTFILES_ZSH_FUNCTIONS}/_*(:t); do
+  for func in ${DOTFILES_ZSH_FUNCTIONS}/_*(N:t); do
     autoload -Uz "${func}"
   done
 
-  for func in ${DOTFILES_ZSH_FUNCTIONS}/[^_]*; do
+  for func in ${DOTFILES_ZSH_FUNCTIONS}/[^_]*(N); do
     source "${func}"
   done
 fi

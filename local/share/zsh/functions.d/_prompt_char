@@ -1,2 +1,0 @@
-if (( $? == 0 )); then; echo '%F{green}➜%f'; else echo '%F{red}➜%f'; fi
-
