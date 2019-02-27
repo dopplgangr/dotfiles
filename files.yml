@@ -30,6 +30,10 @@ dotfiles:
     dst: .vimrc
     desc: vim configs
   -
+    src: dircolors
+    dst: .dircolors
+    desc: GNU dircolors config file
+  -
     src: local
     dst: .local
     desc: user local prefix directory

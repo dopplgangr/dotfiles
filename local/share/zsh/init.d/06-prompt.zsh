@@ -31,12 +31,10 @@ _prompt_git() {
     return
   fi
 
-  local index=$(command git status --porcelain -b 2> /dev/null)
-
   local mods
   set -A mods
 
-  if _git_prompt_modified "$index"; then
+  if _git_prompt_modified; then
     mods+=("!")
   fi
 
@@ -45,8 +43,8 @@ _prompt_git() {
   fi
 
   local modified=""
-  if [[ ${#mods[@]} -gt 0 ]]; then
-    printf -v modified "%s" "${mods[@]}"
+  if [[ -n "${mods[@]}" ]]; then
+    modified=$(printf "%s" "${mods[@]}")
     modified=" [%F{red}${modified}%f]"
   fi
 
