@@ -15,11 +15,15 @@ _git_prompt_abbrev() {
 }
 
 _git_prompt_stash() {
-  [[ -n "$(git stash list)" ]] && return 0 || return 1
+  git rev-parse --verify refs/stash &> /dev/null
 }
 
 _git_prompt_modified() {
   git diff --no-ext-diff --quiet --exit-code && return 1 || return 0
+}
+
+_git_prompt_staged() {
+  local index=$(command git status --porcelain -b 2> /dev/null)
 }
 
 _prompt_git() {
@@ -27,9 +31,12 @@ _prompt_git() {
     return
   fi
 
+  local index=$(command git status --porcelain -b 2> /dev/null)
+
   local mods
   set -A mods
-  if _git_prompt_modified; then
+
+  if _git_prompt_modified "$index"; then
     mods+=("!")
   fi
 
@@ -39,9 +46,8 @@ _prompt_git() {
 
   local modified=""
   if [[ ${#mods[@]} -gt 0 ]]; then
-    local symbols
-    printf -v symbols "%s" "${mods[@]}"
-    modified=" [%F{red}${symbols}%f]"
+    printf -v modified "%s" "${mods[@]}"
+    modified=" [%F{red}${modified}%f]"
   fi
 
   printf " on %s%s" \
