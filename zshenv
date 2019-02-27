@@ -7,7 +7,7 @@ export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
 export EDITOR="nvim"
-export MANPAGER="nvim -R"
+export MANPAGER="viman"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 

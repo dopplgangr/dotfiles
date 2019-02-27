@@ -10,12 +10,16 @@ _git_prompt_abbrev() {
   git rev-parse --abbrev-ref HEAD
 }
 
+_git_prompt_stash() {
+  if git stash list | wc -l 
+}
+
 _git_prompt_modified() {
   git diff --no-ext-diff --quiet --exit-code && return 1 || return 0
 }
 
 _prompt_git() {
-  if !git rev-parse --git-dir 2>/dev/null; then
+  if ! git rev-parse --git-dir --quiet &> /dev/null; then
     return
   fi
 
