@@ -6,8 +6,7 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
-export EDITOR="vim"
-#export MANPAGER="viman"
+export EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
@@ -32,6 +31,7 @@ fi
 
 export LIBRARY_LOG_TIMESTAMP=1
 
+alias tssh='env TERM=screen-256color ssh'
 alias edit='nvim'
 alias vi='nvim'
 alias vim='nvim'
