@@ -2,3 +2,4 @@ tags
 *.zwc
 meta/cache/*
 vim/undo/
+.basedir
