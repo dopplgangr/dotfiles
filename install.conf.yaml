@@ -25,7 +25,9 @@
         ~/.vim: vim
         ~/.zshenv: zshenv
         ~/.zshrc: zshrc
-        ~/.local/share/zsh: zsh/
+        ~/.local/share/zsh/init.d: zsh/init.d
+        ~/.local/share/zsh/functions.d: zsh/functions.d
+        ~/.local/share/zsh/completions.d: zsh/completions.d
 
 - shell:
         - [ mkdir -p ~/.local, Ensuring ~/.local exists ]
