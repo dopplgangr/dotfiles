@@ -17,6 +17,8 @@
         ~/.config/:
           glob: true
           path: config/*
+        ~/.gdbinit.d/: gdb/gdbinit.d
+        ~/.gdbinit: gdb/gdbinit
         ~/.tmux.conf: tmux.conf
         ~/.vimrc: vimrc
         ~/.vim: vim
