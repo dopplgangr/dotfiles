@@ -15,7 +15,7 @@ if [ -d /opt/bin ]; then
 fi
 
 # Process init directory
-source ~/.local/share/zsh/init.d/init.zsh
+source ~/.local/share/zsh/dotfile-init.zsh
 
 # just in case other scripts have messed up our path orders
 source ~/.zshenv
