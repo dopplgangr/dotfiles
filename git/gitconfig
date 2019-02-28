@@ -1,8 +1,14 @@
 [merge]
-  tool = fugitive
+  tool = nvimdiff
 
-[mergetool "fugitive"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[mergetool "nvimdiff"]
+  cmd = nvim -f -c "Gdiff" "$MERGED" 
+
+[difftool]
+  prompt = false
+
+[diff]
+  tool = nvimdiff
 
 
 [alias]
