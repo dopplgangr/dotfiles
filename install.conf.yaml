@@ -25,6 +25,7 @@
         ~/.local/share/zsh/functions.d: zsh/functions.d
         ~/.local/share/zsh/completions.d: zsh/completions.d
         ~/.local/share/zsh/zkbd.d: zsh/zkbd.d
+        ~/.local/share/zsh/zplug-init.zsh: zsh/zplug/init.zsh
         ~/.tmux.conf: tmux.conf
         ~/.vimrc: vimrc
         ~/.vim: vim
