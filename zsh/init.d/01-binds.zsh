@@ -15,7 +15,7 @@ fi
 autoload zkbd
 bindkey -v
 
-ZSH_KBD_SOURCE=~/.zkbd/$TERM
+ZSH_KBD_SOURCE=~/.local/share/zsh/zkbd.d/$TERM
 if [[ -f $ZSH_KBD_SOURCE ]]; then
   source $ZSH_KBD_SOURCE
 else

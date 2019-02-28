@@ -2,6 +2,18 @@
 [[ -n "${DOTFILES_PROFILE}" ]] && zmodload zsh/zprof
 [[ -o nointeractive ]] && return
 
+if [ -d ~/.local/ ]; then
+  PATH=~/.local/bin:$PATH
+  MANPATH=~/.local/share/man:$MANPATH
+  INFOPATH=~/.local/share/info:$INFOPATH
+fi
+
+if [ -d /opt/bin ]; then
+  PATH=$PATH:/opt/bin
+  MANPATH=$MANPATH:/opt/man
+  INFOPATH=$INFOPATH:/opt/info
+fi
+
 # Process init directory
 for include in ~/.local/share/zsh/init.d/* ; do
   source "$include"

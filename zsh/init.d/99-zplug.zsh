@@ -1,7 +1,5 @@
 umask 022
 
-source ~/.local/share/common.sh
-
 # Skip zplug initialization if it's not available
 [[ -f ~/.local/share/zplug/init.zsh ]] || return
 
