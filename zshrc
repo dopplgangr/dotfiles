@@ -15,9 +15,7 @@ if [ -d /opt/bin ]; then
 fi
 
 # Process init directory
-for include in ~/.local/share/zsh/init.d/* ; do
-  source "$include"
-done
+source ~/.local/share/zsh/init.d/init.zsh
 
 # just in case other scripts have messed up our path orders
 source ~/.zshenv

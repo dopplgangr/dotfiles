@@ -1,9 +1,9 @@
 umask 022
 
 # Skip zplug initialization if it's not available
-[[ -f ~/.local/share/zsh/init.zsh ]] || return
+[[ -f ~/.local/share/zsh/zplug-init.zsh ]] || return
 
-source ~/.local/share/zplug/init.zsh
+source ~/.local/share/zplug/zplug-init.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:2
