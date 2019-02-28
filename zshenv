@@ -35,7 +35,6 @@ export LIBRARY_LOG_TIMESTAMP=1
 alias edit='nvim'
 alias vi='nvim'
 alias vim='nvim'
-alias man='~/.local/bin/viman'
 alias top='htop'
 alias ls='ls -h --sort=extension --group-directories-first --color=auto'
 alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
