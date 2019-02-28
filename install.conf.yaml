@@ -16,6 +16,7 @@
 - link:
         ~/.config/dircolors: colors/dircolors
         ~/.config/nvim/init.vim: config/nvim/init.vim
+        ~/.config/htop/htoprc: config/htop/htoprc
         ~/.config/git/gitconfig.home: git/gitconfig.home
         ~/.config/git/gitconfig.work: git/gitconfig.work
         ~/.gdbinit.d: gdb/gdbinit.d
@@ -29,7 +30,7 @@
         ~/.local/share/zsh/zplug-init.zsh: zsh/zplug/init.zsh
         ~/.tmux.conf: tmux.conf
         ~/.vimrc: vimrc
-        ~/.vim: vim
+        ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
         ~/.zshenv: zshenv
         ~/.zshrc: zshrc
 
