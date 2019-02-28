@@ -32,6 +32,7 @@ fi
 
 export LIBRARY_LOG_TIMESTAMP=1
 
+alias edit='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
