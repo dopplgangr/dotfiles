@@ -6,8 +6,8 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
-export EDITOR="nvim"
-export MANPAGER="viman"
+export EDITOR="vim"
+#export MANPAGER="viman"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
@@ -34,8 +34,6 @@ export LIBRARY_LOG_TIMESTAMP=1
 
 alias vi='nvim'
 alias vim='nvim'
-alias man='~/.local/bin/viman'
-
 
 alias ls='ls -h --sort=extension --group-directories-first --color=auto'
 alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
