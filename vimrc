@@ -117,6 +117,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Quick edit config files
+nnoremap <leader>ed :edit ~/.dotfiles/<CR>|
 nnoremap <leader>ev :edit ~/.vimrc<CR>|
 nnoremap <leader>et :edit ~/.tmux.conf<CR>|
 

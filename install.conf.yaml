@@ -5,6 +5,14 @@
 
 - clean: ['~']
 
+- shell:
+        -
+          command: git submodule update --init --recursive
+          stdin: true
+          stdout: true
+          description: Updating Submodules
+          quiet: true
+
 - link:
         ~/.config/:
           glob: true
@@ -17,11 +25,6 @@
         ~/.local/share/zsh: zsh/
 
 - shell:
-        -
-          command: git submodule update --init --recursive
-          stdin: true
-          stdout: true
-          description: Installing submodules
-          quiet: true
+        - [ mkdir -p ~/.local, Ensuring ~/.local exists ]
         - [ ./meta/terminfo.sh, Installing local terminfo database ]
 
