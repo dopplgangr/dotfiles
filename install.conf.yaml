@@ -14,11 +14,12 @@
           quiet: true
 
 - link:
-        ~/.config/:
-          glob: true
-          path: config/*
+        ~/.config/nvim/init.vim: config/nvim/init.vim
+        ~/.config/git/gitconfig.home: git/gitconfig.home
+        ~/.config/git/gitconfig.work: git/gitconfig.work
         ~/.gdbinit.d: gdb/gdbinit.d
         ~/.gdbinit: gdb/gdbinit
+        ~/.gitconfig: git/gitconfig
         ~/.tmux.conf: tmux.conf
         ~/.vimrc: vimrc
         ~/.vim: vim

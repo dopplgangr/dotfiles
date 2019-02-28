@@ -29,13 +29,13 @@
 	name = dopplgangr
 
 [includeIf "gitdir:~/projects/"]
-  path = ~/.git/gitconfig.home
+  path = ~/.config/git/gitconfig.home
 
 [includeIf "gitdir:~/workspace/"]
-	path = ~/.git/gitconfig.work
+	path = ~/.config/git/gitconfig.work
 
 [include]
-    path = ~/.gitconfig.local 
+    path = ~/.config/git/gitconfig.local 
 
 [core]
 	editor = nvim
