@@ -17,11 +17,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'       " Markdown support  
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'stephpy/vim-yaml'              " yaml syntax support
+Plug 'benmills/vimux' 
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
-Plug 'benmills/vimux' 
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'  " better grepping ( source code aware )
+Plug 'christoomey/vim-tmux-navigator' " seemless transition between vim and tmux
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -111,10 +112,10 @@ let mapleader=','                                " leader key
 " improved keyboard support for navigation (especially terminal)
 " https://neovim.io/doc/user/nvim_terminal_emulator.html
 "
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Quick edit config files
 nnoremap <leader>ed :edit ~/.dotfiles/<CR>|

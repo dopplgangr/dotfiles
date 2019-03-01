@@ -56,13 +56,4 @@ windows:
           - ssh ny4-collector-01
           - nvim
         - shell:
-  - ny4-coll:
-      layout: even-horizontal
-      panes:
-        - a: tssh ny4-collector-a
-        - b: tssh ny4-collector-b
-        - c: tssh ny4-collector-c
-        - d: tssh ny4-collector-d
         
-        
-

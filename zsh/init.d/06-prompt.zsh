@@ -1,59 +1,114 @@
-_prompt_char='»'
-_prompt_host="%m"
-_prompt_user="%n"
+# Control
+# by Christian Todie
+# MIT license
 
-_prompt_status() {
-  if [[ $? -eq 0 ]]; then
-    printf " %%F{green}%s%%f" "${_prompt_char}"
-  else
-    printf " %%F{red}%s%%f" "${_prompt_char}"
-  fi
+# For my own and others sanity
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+
+prompt_control_human_time() {
+	local tmp=$1
+	local days=$(( tmp / 60 / 60 / 24 ))
+	local hours=$(( tmp / 60 / 60 % 24 ))
+	local minutes=$(( tmp / 60 % 60 ))
+	local seconds=$(( tmp % 60 ))
+	echo -n "⌚︎ "
+	(( $days > 0 )) && echo -n "${days}d "
+	(( $hours > 0 )) && echo -n "${hours}h "
+	(( $minutes > 0 )) && echo -n "${minutes}m "
+	echo "${seconds}s"
 }
 
-_git_prompt_abbrev() {
-  git rev-parse --abbrev-ref HEAD
+prompt_control_precmd() {
+	# shows the full path in the title
+	print -Pn '\e]0;%~\a'
+
+	local prompt_control_preprompt="%c$(git_prompt_info) $(git_prompt_status)"
+	print -P ' %F{yellow}`prompt_control_cmd_exec_time`%f'
+
+	# check async if there is anything to pull
+	(( ${control_GIT_PULL:-1} )) && {
+		# check if we're in a git repo
+		command git rev-parse --is-inside-work-tree &>/dev/null &&
+		# check check if there is anything to pull
+		command git fetch &>/dev/null &&
+		# check if there is an upstream configured for this branch
+		command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
+		(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
+		# some crazy ansi magic to inject the symbol into the previous line
+		print -Pn "\e7\e[0G\e[$(prompt_control_string_length $prompt_control_preprompt)C%F{cyan}⇣%f\e8"
+	} &!
+
+	# reset value since `preexec` isn't always triggered
+	unset cmd_timestamp
 }
 
-_git_prompt_stash() {
-  git rev-parse --verify refs/stash &> /dev/null
+# displays the exec time of the last command if set threshold was exceeded
+prompt_control_cmd_exec_time() {
+	local stop=$EPOCHSECONDS
+	local start=${cmd_timestamp:-$stop}
+	integer elapsed=$stop-$start
+	(($elapsed > ${control_CMD_MAX_EXEC_TIME:=5})) && prompt_control_human_time $elapsed
 }
 
-_git_prompt_modified() {
-  git diff --no-ext-diff --quiet --exit-code && return 1 || return 0
+prompt_control_preexec() {
+	cmd_timestamp=$EPOCHSECONDS
+
+	# shows the current dir and executed command in the title when a process is active
+	print -Pn "\e]0;"
+	echo -nE "$PWD:t: $2"
+	print -Pn "\a"
 }
 
-_git_prompt_staged() {
-  local index=$(command git status --porcelain -b 2> /dev/null)
+# string length ignoring ansi escapes
+prompt_control_string_length() {
+	echo ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}}
 }
 
-_prompt_git() {
-  if ! git rev-parse --git-dir --quiet &> /dev/null; then
-    return
-  fi
+prompt_control_setup() {
+	# prevent percentage showing up
+	# if output doesn't end with a newline
+	export PROMPT_EOL_MARK=''
 
-  local mods
-  set -A mods
+	prompt_opts=(cr subst percent)
 
-  if _git_prompt_modified; then
-    mods+=("!")
-  fi
+	zmodload zsh/datetime
+	autoload -Uz add-zsh-hook
+	autoload -Uz vcs_info
 
-  if _git_prompt_stash; then
-    mods+=("$")
-  fi
+	add-zsh-hook precmd prompt_control_precmd
+	add-zsh-hook preexec prompt_control_preexec
 
-  local modified=""
-  if [[ -n "${mods[@]}" ]]; then
-    modified=$(printf "%s" "${mods[@]}")
-    modified=" [%F{red}${modified}%f]"
-  fi
+	# show username@host if logged in through SSH
+	[[ "$SSH_CONNECTION" != '' ]] && prompt_control_username='%n@%m '
 
-  printf " on %s%s" \
-    "%F{magenta} $(_git_prompt_abbrev)%f" \
-    "${modified}"
+	ZSH_THEME_GIT_PROMPT_PREFIX=" %F{white}on%f %f%F{white}%f:%F{yellow}"
+	ZSH_THEME_GIT_PROMPT_SUFFIX="%b"
+	ZSH_THEME_GIT_PROMPT_DIRTY=""
+	ZSH_THEME_GIT_PROMPT_CLEAN=""
+	ZSH_THEME_GIT_PROMPT_ADDED="%F{green}+%f"
+	ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue}✶%f"
+	ZSH_THEME_GIT_PROMPT_DELETED="%F{red}-%f"
+	ZSH_THEME_GIT_PROMPT_RENAMED="%F{magenta}➜%f"
+	ZSH_THEME_GIT_PROMPT_UNMERGED="%F{yellow}═%f"
+	ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}✩%f"
+  ZSH_THEME_GIT_STATUS_PREFIX="["
+  ZSH_THEME_GIT_STATUS_SUFFIX="]"
+
+	# prompt turns red if the previous command didn't exit with 0
+  PROMPT='%F{cyan}%~%f$(git_prompt_info)$(git_prompt_status) %(?.%F{yellow}.%F{red})»%f '
+	RPROMPT='%F{red}%(?..⏎)%f'
 }
 
-# Note: all prompt components are responsible for their own left space padding if applicable
-export PROMPT='${_prompt_user}@%F{yellow}${_prompt_host}%f$(_prompt_git)$(_prompt_status) '
+prompt_control_setup "$@"
 
 # vim: set filetype=zsh
