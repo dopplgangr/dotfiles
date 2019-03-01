@@ -30,9 +30,9 @@
   lsc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
   llc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
   filelog = log -u
   fl = log -u
-  #dl = "!git ll -1"
   dlc = diff --cached HEAD^
   dc = "diff --color"
 
@@ -52,7 +52,8 @@
 [core]
   editor = nvim
   page   = nvim -f -R -c 'set ft=diff' +1 -
-  #page   = nvim -R -c '%sm/\\e.\\{-}m//g' -c 'set ft=diff' +1 -
 
 [color]
   pager = no
+
+# vim: ft=gitconfig
