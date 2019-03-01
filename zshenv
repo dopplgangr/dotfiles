@@ -16,6 +16,14 @@ if [ -d ${HOME}/go ]; then
   export PATH=$GOPATH/bin:$PATH
 fi
 
+# set up local ruby env if it exists
+if [ -d ${HOME}/.gem ]; then
+  GEM_HOME=~/.local/share/ruby
+  GEM_PATH="$GEM_HOME:$GEM_PATH"
+  export PATH="/home/ctodie/.gem/ruby/2.5.0/bin:$PATH"
+  mkdir -p "$GEM_HOME"
+fi
+
 # moved these here so shells have access to them
 DOTFILES_ZSH_FUNCTIONS=~/.local/share/zsh/functions.d
 if [[ -d ${DOTFILES_ZSH_FUNCTIONS} ]]; then
@@ -45,3 +53,4 @@ alias df="df -Tha --total"
 alias du="du -ach | sort -h"
 alias free="free -mt"
 alias ps="ps auxf"
+

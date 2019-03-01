@@ -12,6 +12,7 @@
 
 
 [alias]
+  # status
   ls           = "!git status -suno"
   ls-modified  = "!git status --porcelain -uno | awk 'match($1, /M/) {print $2}'"
   ls-added     = "!git status --porcelain -uno | awk 'match($1, /A/) {print $2}'"
@@ -21,31 +22,36 @@
   ls-updated   = "!git status --porcelain -uno | awk 'match($1, /U/) {print $2}'"
   ls-staged    = "!git status --porcelain -uno | grep -P '^[MA]' | awk '{ print $2 }'"
   ls-untracked = "!git status --porcelain -uall | awk '$1 == \"??\" {print $2}'"
+
+  # display
   graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+  # log
   lsc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
   llc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
   filelog = log -u
   fl = log -u
-  dl = "!git ll -1"
+  #dl = "!git ll -1"
   dlc = diff --cached HEAD^
+  dc = "diff --color"
 
 [user]
-	email = dopplgangr@gmail.com
-	name = dopplgangr
+  email = dopplgangr@gmail.com
+  name = dopplgangr
 
 [includeIf "gitdir:~/projects/"]
   path = ~/.config/git/gitconfig.home
 
 [includeIf "gitdir:~/workspace/"]
-	path = ~/.config/git/gitconfig.work
+  path = ~/.config/git/gitconfig.work
 
 [include]
-    path = ~/.config/git/gitconfig.local 
+  path = ~/.config/git/gitconfig.local 
 
 [core]
-	editor = nvim
-  page   = nvim -R -c 'set ft=diff' +1 -
+  editor = nvim
+  page   = nvim -f -R -c 'set ft=diff' +1 -
   #page   = nvim -R -c '%sm/\\e.\\{-}m//g' -c 'set ft=diff' +1 -
 
 [color]

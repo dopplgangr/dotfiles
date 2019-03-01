@@ -120,6 +120,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>ed :edit ~/.dotfiles/<CR>|
 nnoremap <leader>ev :edit ~/.vimrc<CR>|
 nnoremap <leader>et :edit ~/.tmux.conf<CR>|
+nnoremap <leader>eg :edit ~/.gitconfig<CR>|
 
 nnoremap <leader>, :let @/=''<CR>:noh<CR>|       " clear search
 nnoremap <silent> <leader># :g/\v^(#\|$)/d_<CR>| " delete commented blank lines
