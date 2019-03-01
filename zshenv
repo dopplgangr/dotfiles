@@ -39,12 +39,16 @@ fi
 
 export LIBRARY_LOG_TIMESTAMP=1
 
+mux() {
+  tmuxinator "$@" 2>/dev/null
+}
+
 alias tssh='env TERM=screen-256color ssh'
 alias edit='nvim'
 alias vi='nvim'
 alias vim='nvim'
 #alias top='htop'
-alias mux='tmuxinator'
+#alias mux='tmuxinator'
 alias ls='ls -h --sort=extension --group-directories-first --color=auto'
 alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
 alias la='ls -hla --sort=extension --group-directories-first --color=auto'
