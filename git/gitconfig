@@ -24,6 +24,7 @@
   ls-untracked = "!git status --porcelain -uall | awk '$1 == \"??\" {print $2}'"
 
   # display
+  hist  = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
   # log
