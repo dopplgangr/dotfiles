@@ -10,7 +10,6 @@
 [diff]
   tool = nvimdiff
 
-
 [alias]
   # status
   ls           = "!git status -suno"
@@ -52,9 +51,9 @@
 
 [core]
   editor = nvim
-  page   = nvim -f -R -c 'set ft=diff' +1 -
+  page   = less -r 
 
 [color]
-  pager = no
+  pager = yes
 
 # vim: ft=gitconfig
