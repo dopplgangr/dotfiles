@@ -121,6 +121,7 @@ let mapleader=','                                " leader key
 nnoremap <leader>ed :edit ~/.dotfiles/<CR>|
 nnoremap <leader>ev :edit ~/.vimrc<CR>|
 nnoremap <leader>et :edit ~/.tmux.conf<CR>|
+nnoremap <leader>ep :edit ~/.local/share/zsh/init.d/06-prompt.zsh<CR>|
 nnoremap <leader>eg :edit ~/.gitconfig<CR>|
 
 nnoremap <leader>, :let @/=''<CR>:noh<CR>|       " clear search

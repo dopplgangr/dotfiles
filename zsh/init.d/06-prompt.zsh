@@ -3,10 +3,18 @@
 # MIT license
 
 # For my own and others sanity
-# git:
-# %b => current branch
-# %a => current action (rebase/merge)
-# prompt:
+
+# general:
+# %% => literal %
+# %) => literal )
+
+# login information:
+# %l => current tty session ( dev path removed ) 
+# %y => current tty session 
+# %M => full hostname
+# %m => short hostname 
+# %n => username
+
 # %F => color dict
 # %f => reset color
 # %~ => current path
@@ -15,13 +23,18 @@
 # %m => shortname host
 # %(?..) => prompt conditional - %(condition.true.false)
 
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+
 prompt_control_human_time() {
 	local tmp=$1
 	local days=$(( tmp / 60 / 60 / 24 ))
 	local hours=$(( tmp / 60 / 60 % 24 ))
 	local minutes=$(( tmp / 60 % 60 ))
 	local seconds=$(( tmp % 60 ))
-	echo -n "⌚︎ "
+	local outputchar="${prompt_control_human_time_char-%{⏱ %G%}}"
+	echo -n "${outputchar} "
 	(( $days > 0 )) && echo -n "${days}d "
 	(( $hours > 0 )) && echo -n "${hours}h "
 	(( $minutes > 0 )) && echo -n "${minutes}m "
@@ -91,21 +104,22 @@ prompt_control_setup() {
 	# show username@host if logged in through SSH
 	[[ "$SSH_CONNECTION" != '' ]] && prompt_control_username='%n@%m '
 
-	ZSH_THEME_GIT_PROMPT_PREFIX=" %F{white}on%f %f%F{white}%f:%F{yellow}"
+	ZSH_THEME_GIT_PROMPT_PREFIX=" on %{%G%}%F{white}%f:%F{yellow}"
 	ZSH_THEME_GIT_PROMPT_SUFFIX="%b"
 	ZSH_THEME_GIT_PROMPT_DIRTY=""
 	ZSH_THEME_GIT_PROMPT_CLEAN=""
-	ZSH_THEME_GIT_PROMPT_ADDED="%F{green}+%f"
-	ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue}✶%f"
-	ZSH_THEME_GIT_PROMPT_DELETED="%F{red}-%f"
-	ZSH_THEME_GIT_PROMPT_RENAMED="%F{magenta}➜%f"
-	ZSH_THEME_GIT_PROMPT_UNMERGED="%F{yellow}═%f"
-	ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}✩%f"
+	ZSH_THEME_GIT_PROMPT_ADDED="%{%F{green}+%f%G%}"
+	ZSH_THEME_GIT_PROMPT_MODIFIED="%{%F{blue}✶%f%G%}"
+	ZSH_THEME_GIT_PROMPT_DELETED="%{%F{red}-%f%G%}"
+	ZSH_THEME_GIT_PROMPT_RENAMED="%{%F{magenta}↠%f%G}"
+	ZSH_THEME_GIT_PROMPT_UNMERGED="%{%F{yellow}═%f%G%}"
+	ZSH_THEME_GIT_PROMPT_UNTRACKED="%{%F{cyan}✩%f%G%}"
+	ZSH_THEME_GIT_PROMPT_STASHED="%{%F{red}$%f%G%}"
   ZSH_THEME_GIT_STATUS_PREFIX="["
   ZSH_THEME_GIT_STATUS_SUFFIX="]"
 
 	# prompt turns red if the previous command didn't exit with 0
-  PROMPT='%F{cyan}%~%f$(git_prompt_info)$(git_prompt_status) %(?.%F{yellow}.%F{red})»%f '
+  PROMPT='$prompt_control_username%F{cyan}%~%f$(git_prompt_info)$(git_prompt_status) %(?.%F{yellow}.%F{red})»%f '
 	RPROMPT='%F{red}%(?..⏎)%f'
 }
 

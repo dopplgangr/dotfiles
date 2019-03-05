@@ -20,6 +20,12 @@ if ! zplug check --verbose; then
   fi
 fi
 
+if dotfiles::compinit::is_stale 360; then
+  compinit
+else
+  compinit -C
+fi
+
 # Source plugins && add commands to $PATH
 zplug load
 
