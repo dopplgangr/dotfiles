@@ -73,8 +73,8 @@ MULTIHARDLINK 00;36            # regular file with more than one link
 FIFO 04;33                     # pipe
 SOCK 04;35                     # socket
 DOOR 04;36                     # door
-BLK 02;31;43                   # block device driver
-CHR 02;30;43                   # character device driver
+BLK 01;31;43                   # block device driver
+CHR 01;30;43                   # character device driver
 SETUID 00;30;42                # file that is setuid (u+s)
 SETGID 00;30;44                # file that is setgid (g+s)
 CAPABILITY 30;41               # file with capability

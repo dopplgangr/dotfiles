@@ -20,10 +20,10 @@ if ! zplug check --verbose; then
   fi
 fi
 
-if dotfiles::compinit::is_stale 360; then
-  compinit
+if dotfiles::compinit::is_stale 3600; then
+  compinit -d ~/.zplug/zcompdump
 else
-  compinit -C
+  compinit -C -d ~/.zplug/zcompdump
 fi
 
 # Source plugins && add commands to $PATH

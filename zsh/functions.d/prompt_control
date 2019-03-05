@@ -33,7 +33,7 @@ prompt_control_human_time() {
 	local hours=$(( tmp / 60 / 60 % 24 ))
 	local minutes=$(( tmp / 60 % 60 ))
 	local seconds=$(( tmp % 60 ))
-	local outputchar="${prompt_control_human_time_char-%{⏱ %G%}}"
+	local outputchar="${prompt_control_human_time_char-%{⧖%G%}}"
 	echo -n "${outputchar} "
 	(( $days > 0 )) && echo -n "${days}d "
 	(( $hours > 0 )) && echo -n "${hours}h "
