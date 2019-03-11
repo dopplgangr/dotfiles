@@ -148,8 +148,7 @@ map <leader>d "_d|                               " delete selected text
 " Custom Commands
 cnoreabbrev w!! w !sudo tee > /dev/null %|       " write file with sudo
 
-
-" Netrw settings
+" Netr: settings
 let g:netrw_banner=0
 let g:netrw_browse_split=1
 
