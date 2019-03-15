@@ -50,10 +50,15 @@ windows:
         - vim: 
           - nvim
         - shell: 
-  - dev-editor: 
+  - Hanlib: 
       panes:
         - vim: 
           - ssh ny4-collector-01
+          - cd ~/workspace/Hanlib
+          - source /opt/rh/devtoolset-7/enable && source ~/.zshrc
           - nvim
         - shell:
+          - ssh ny4-collector-01
+          - source /opt/rh/devtoolset-7/enable && source ~/.zshrc
+          - cd ~/workspace/Hanlib 
         
