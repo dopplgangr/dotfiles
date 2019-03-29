@@ -27,18 +27,18 @@
   graph = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
   # log
-  lsc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  llc = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  log-short = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  log-long  = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  log-nocolor = log --pretty=format:"%h\\ %s\\ [%cn]"
 
-  filelog = log -u
-  fl = log -u
-  dlc = diff --cached HEAD^
-  dc = "diff --color"
+  log-files = log -u
+
+  diff-cached = diff --cached HEAD^
+  diff-color  = diff --color
 
 [user]
-  email = dopplgangr@gmail.com
-  name = dopplgangr
+  email = ctodie@hanweckassoc.com
+  name = Christian Todie
 
 [includeIf "gitdir:~/projects/"]
   path = ~/.config/git/gitconfig.home
