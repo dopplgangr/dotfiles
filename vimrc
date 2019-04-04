@@ -21,6 +21,11 @@ Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plug 'ervandew/supertab'             " tab do all the things
 " - develop ----
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+"Plug 'Valloric/YouCompleteMe'
 " - filetypes ----
 Plug 'Shougo/vimproc.vim', {'do':'make'}
 Plug 'editorconfig/editorconfig-vim' " enforce editor configs

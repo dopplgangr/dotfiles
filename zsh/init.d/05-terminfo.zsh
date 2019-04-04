@@ -3,6 +3,6 @@ if ! infocmp tmux-256color &> /dev/null; then
   tic -x ~/.local/share/terminfo/tmux
 fi
 
-if [ -f ~/.dircolors ]; then
+if [ -f ~/.config/dircolors ]; then
   eval "$(command dircolors ~/.dircolors)"
 fi
