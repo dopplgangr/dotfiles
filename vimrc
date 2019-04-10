@@ -12,7 +12,7 @@ Plug 'tpope/vim-fugitive' " git
 Plug 'tpope/vim-commentary' " comments
 Plug 'tpope/vim-surround'    " braces,parens,quotes
 " - panels -----
-"Plug 'vim-airline/vim-airline'
+Plug 'christoomey/vim-tmux-navigator' " seamless tmux+vim navigation
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'   " nerdtree git icons
