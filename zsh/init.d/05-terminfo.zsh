@@ -7,3 +7,5 @@ DOTFILES_DIRCOLORS=${HOME}/.config/dircolors
 if [ -f ${DOTFILES_DIRCOLORS} ]; then
   eval "$(command dircolors ${DOTFILES_DIRCOLORS})"
 fi
+
+[[ -f ~/.config/theme ]] && source ~/.config/theme
