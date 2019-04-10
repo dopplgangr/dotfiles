@@ -6,7 +6,8 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 export CLICOLOR_FORCE=1
 export KEYTIMEOUT=1
-export EDITOR="nvim"
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 

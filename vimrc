@@ -13,6 +13,7 @@ Plug 'tpope/vim-commentary' " comments
 Plug 'tpope/vim-surround'    " braces,parens,quotes
 " - panels -----
 Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'   " nerdtree git icons
 Plug 'majutsushi/tagbar'
@@ -30,12 +31,9 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
-"Plug 'Valloric/YouCompleteMe'
 " - filetypes ----
-Plug 'Shougo/vimproc.vim', {'do':'make'}
 Plug 'plasticboy/vim-markdown'       " Markdown support  
 Plug 'stephpy/vim-yaml'              " yaml syntax support
-Plug 'benmills/vimux' 
 Plug 'mileszs/ack.vim'  " better grepping ( source code aware )
 
 " ------------------------------
@@ -54,9 +52,20 @@ set showcmd                             " show command keys
 set splitbelow splitright
 
 " UI
+if exists('+termguicolors')
+" enable truecolor in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 colorscheme gruvbox
 set termguicolors
 set background=dark
+
+let g:gruvbox_termcolors = '256'
+
+
 
 set sidescroll=6
 set listchars=eol:¶,trail:•,tab:▸\               " whitespace characters
@@ -129,6 +138,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " -- shut down
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " == fugitive ==
+"
 
 nnoremap <leader>gs :Gstatus<CR>
 " == Ctrl-P ==
@@ -146,4 +156,3 @@ let g:ctrlp_custom_ignore = {
 " == Ack ==
 let g:ackprg = 'ag --nogroup --column' " use ag instead of default
 " =====
-
