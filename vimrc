@@ -12,14 +12,12 @@ Plug 'tpope/vim-fugitive' " git
 Plug 'tpope/vim-commentary' " comments
 Plug 'tpope/vim-surround'    " braces,parens,quotes
 " - panels -----
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'   " nerdtree git icons
 Plug 'majutsushi/tagbar'
 Plug 'jlanzarotta/bufexplorer'
-" - themes ----
-Plug 'morhetz/gruvbox'
 " - enhance ----
 Plug 'editorconfig/editorconfig-vim' " enforce editor configs
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
@@ -54,18 +52,11 @@ set splitbelow splitright
 " UI
 if exists('+termguicolors')
 " enable truecolor in tmux
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
-colorscheme gruvbox
 set termguicolors
 set background=dark
-
-let g:gruvbox_termcolors = '256'
-
-
 
 set sidescroll=6
 set listchars=eol:¶,trail:•,tab:▸\               " whitespace characters
