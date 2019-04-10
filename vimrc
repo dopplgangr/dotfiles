@@ -12,13 +12,18 @@ Plug 'tpope/vim-fugitive' " git
 Plug 'tpope/vim-commentary' " comments
 Plug 'tpope/vim-surround'    " braces,parens,quotes
 " - panels -----
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'   " nerdtree git icons
 Plug 'majutsushi/tagbar'
 Plug 'jlanzarotta/bufexplorer'
+" - themes ----
+Plug 'morhetz/gruvbox'
 " - enhance ----
+Plug 'editorconfig/editorconfig-vim' " enforce editor configs
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plug 'ervandew/supertab'             " tab do all the things
+Plug 'godlygeek/tabular'  
 " - develop ----
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -28,70 +33,52 @@ Plug 'honza/vim-snippets'
 "Plug 'Valloric/YouCompleteMe'
 " - filetypes ----
 Plug 'Shougo/vimproc.vim', {'do':'make'}
-Plug 'editorconfig/editorconfig-vim' " enforce editor configs
-Plug 'godlygeek/tabular'  
 Plug 'plasticboy/vim-markdown'       " Markdown support  
 Plug 'stephpy/vim-yaml'              " yaml syntax support
 Plug 'benmills/vimux' 
-Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'mileszs/ack.vim'  " better grepping ( source code aware )
 
 " ------------------------------
 call plug#end()
 " ==============================
 " Basic
-set autoread        " relead on external file changes
-set backspace=indent,eol,start    " backspace behavior
-set clipboard=unnamed,unnamedplus " enable clipboard
+set autoread                            " relead on external file changes
+set backspace=indent,eol,start          " backspace behavior
+set clipboard=unnamed,unnamedplus       " enable clipboard
 set encoding=utf-8                      " enable utf-8 support
-set hidden        " hide buffers, don't close
-set number        " show line numbers
+set hidden                              " hide buffers, don't close
+set number                              " show line numbers
 set wildmenu wildmode=longest:full,full " wildmenu settings
 set wildcharm=<Tab>                     " wildmenu character
 set showcmd                             " show command keys
 set splitbelow splitright
 
 " UI
-filetype on
-filetype plugin on
-filetype indent on
-syntax on
+colorscheme gruvbox
+set termguicolors
+set background=dark
 
 set sidescroll=6
 set listchars=eol:¶,trail:•,tab:▸\               " whitespace characters
 set showbreak=¬\                                 " Wrapping character
 set showmatch
 
-" Colors
-"hi Normal guibg=NONE ctermbg=NONE|   " transparency fix
-hi Search ctermfg=black|              " highlight fix
-hi Error ctermfg=black|
-hi ErrorMsg ctermfg=black|              " highlight fix
-hi PmenuSbar ctermfg=black|
-hi DiffText ctermfg=black|              " highlight fix
-hi Visual ctermfg=black|
-hi CursorColumn ctermfg=black|
-hi Folded ctermfg=lightblue|
-hi NvimInternalError ctermfg=black|
-
 " Tabs & Indentation
 set autoindent expandtab
 set shiftwidth=2 softtabstop=2 tabstop=2
 
-
 " Search
 set hlsearch ignorecase incsearch smartcase      " search options
-
 
 " Undo & Backup
 set nobackup noswapfile nowritebackup            " disable backup and swap files
 set undofile undodir=~/.vim/undo undolevels=9999 " undo options
 
 " Performance Tuning
-set lazyredraw           " enable lazy redraw
-set nocursorline                                 " disable cursorline          
+set lazyredraw   " enable lazy redraw
+set nocursorline " disable cursorline
 set noshowmode
-set ttyfast                                      " enable fast terminal connection
+set ttyfast      " enable fast terminal connection
 
 " Tags
 set tags+=tags
