@@ -29,6 +29,7 @@
         ~/.local/share/zsh/dotfile-init.zsh: zsh/init.zsh
         ~/.local/share/zsh/zplug-init.zsh: zsh/zplug/init.zsh
         ~/.tmux.conf: tmux.conf
+        ~/.tmux/plugins/tpm : tmux/tpm
         ~/.vimrc: vimrc
         ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
         ~/.zshenv: zshenv
