@@ -111,7 +111,7 @@ prompt_control_setup() {
 	ZSH_THEME_GIT_PROMPT_ADDED="%{%F{green}+%f%G%}"
 	ZSH_THEME_GIT_PROMPT_MODIFIED="%{%F{blue}✶%f%G%}"
 	ZSH_THEME_GIT_PROMPT_DELETED="%{%F{red}-%f%G%}"
-	ZSH_THEME_GIT_PROMPT_RENAMED="%{%F{magenta}↠%f%G%}"
+	ZSH_THEME_GIT_PROMPT_RENAMED="%{%F{magenta}>%f%G%}"
 	ZSH_THEME_GIT_PROMPT_UNMERGED="%{%F{yellow}═%f%G%}"
 	ZSH_THEME_GIT_PROMPT_UNTRACKED="%{%F{cyan}✩%f%G%}"
 	ZSH_THEME_GIT_PROMPT_STASHED="%{%F{red}$%f%G%}"
@@ -125,4 +125,4 @@ prompt_control_setup() {
 
 prompt_control_setup "$@"
 
-# vim: set filetype=zsh
+# vim: set filetype=sh
