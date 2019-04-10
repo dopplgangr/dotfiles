@@ -17,12 +17,10 @@
         ~/.config/dircolors: colors/dircolors
         ~/.config/nvim/init.vim: config/nvim/init.vim
         ~/.config/htop/htoprc: config/htop/htoprc
-        ~/.config/tmuxinator: config/tmuxinator/
-        ~/.config/git/gitconfig.home: git/gitconfig.home
-        ~/.config/git/gitconfig.work: git/gitconfig.work
-        ~/.gdbinit.d: gdb/gdbinit.d
-        ~/.gdbinit: gdb/gdbinit
+        ~/.config/tmuxinator: config/tmuxinator
+        ~/.config/git: git/
         ~/.gitconfig: git/gitconfig
+        ~/.gdbinit: gdb/gdbinit
         ~/.local/share/zsh/init.d: zsh/init.d
         ~/.local/share/zsh/functions.d: zsh/functions.d
         ~/.local/share/zsh/completions.d: zsh/completions.d

@@ -36,18 +36,14 @@
   diff-cached = diff --cached HEAD^
   diff-color  = diff --color
 
-[user]
-  email = ctodie@hanweckassoc.com
-  name = Christian Todie
+[include]
+  path = ~/.config/git/gitconfig.local 
 
 [includeIf "gitdir:~/projects/"]
   path = ~/.config/git/gitconfig.home
 
 [includeIf "gitdir:~/workspace/"]
   path = ~/.config/git/gitconfig.work
-
-[include]
-  path = ~/.config/git/gitconfig.local 
 
 [core]
   editor = nvim
