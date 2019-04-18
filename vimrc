@@ -8,9 +8,9 @@ endif
 call plug#begin('~/.vim/plugged')
 " ------------------------------
 " - basic ------
-Plug 'tpope/vim-fugitive' " git
+Plug 'tpope/vim-fugitive'   " git
 Plug 'tpope/vim-commentary' " comments
-Plug 'tpope/vim-surround'    " braces,parens,quotes
+Plug 'tpope/vim-surround'   " braces,parens,quotes
 " - panels -----
 Plug 'christoomey/vim-tmux-navigator' " seamless tmux+vim navigation
 Plug 'airblade/vim-gitgutter'
@@ -20,9 +20,10 @@ Plug 'majutsushi/tagbar'
 Plug 'jlanzarotta/bufexplorer'
 " - enhance ----
 Plug 'editorconfig/editorconfig-vim' " enforce editor configs
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
 Plug 'ervandew/supertab'             " tab do all the things
-Plug 'godlygeek/tabular'  
+Plug 'godlygeek/tabular'             " god mode table alignment
+Plug 'mileszs/ack.vim'               " better grepping ( source code aware )
+Plug 'ctrlpvim/ctrlp.vim'            " fuzzy file finder
 " - develop ----
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -30,9 +31,9 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 " - filetypes ----
-Plug 'plasticboy/vim-markdown'       " Markdown support  
-Plug 'stephpy/vim-yaml'              " yaml syntax support
-Plug 'mileszs/ack.vim'  " better grepping ( source code aware )
+Plug 'plasticboy/vim-markdown' " Markdown support
+Plug 'avakhov/vim-yaml'        " yaml syntax support
+Plug 'chrisbra/vim-zsh'
 
 " ------------------------------
 call plug#end()
@@ -51,12 +52,10 @@ set splitbelow splitright
 
 " UI
 if exists('+termguicolors')
-" enable truecolor in tmux
+  " enable truecolor in tmux
   set termguicolors
+  set background=dark
 endif
-
-set termguicolors
-set background=dark
 
 set sidescroll=6
 set listchars=eol:¶,trail:•,tab:▸\               " whitespace characters
@@ -64,8 +63,7 @@ set showbreak=¬\                                 " Wrapping character
 set showmatch
 
 " Tabs & Indentation
-set autoindent expandtab
-set shiftwidth=2 softtabstop=2 tabstop=2
+set tabstop=2 softtabstop=2 shiftwidth=2
 
 " Search
 set hlsearch ignorecase incsearch smartcase      " search options
@@ -112,7 +110,6 @@ nnoremap <silent> <leader>t :%s/.\+$//e<CR>|     " trim whitespace
 nnoremap <leader>ed :edit ~/.dotfiles/<CR>|
 nnoremap <leader>ev :edit ~/.vimrc<CR>|
 nnoremap <leader>et :edit ~/.tmux.conf<CR>|
-nnoremap <leader>ep :edit ~/.local/share/zsh/init.d/06-prompt.zsh<CR>|
 nnoremap <leader>eg :edit ~/.gitconfig<CR>|
 " -- function keys ----
 " <F1> help
@@ -120,6 +117,7 @@ nnoremap <F2> :NERDTreeToggle<CR>
 " <F3> Ctrl-P Plugin
 nnoremap <F4> gg=G''
 nnoremap <F5> :make!<cr>
+nnoremap <F6> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 nnoremap <F8> :TagbarToggle<CR>
 
 " == Nerd Tree ==
@@ -129,9 +127,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " -- shut down
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " == fugitive ==
-"
-
 nnoremap <leader>gs :Gstatus<CR>
+" == Ack ==
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep' " use ag instead of default
+endif
 " == Ctrl-P ==
 let g:ctrlp_map = '<F3>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -144,6 +144,3 @@ let g:ctrlp_custom_ignore = {
       \ 'link': 'some_bad_symbolic_links',
       \ }
 
-" == Ack ==
-let g:ackprg = 'ag --nogroup --column' " use ag instead of default
-" =====

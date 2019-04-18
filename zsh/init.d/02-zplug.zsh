@@ -1,19 +1,19 @@
 umask 022
 
-ZSH_TMUX_AUTOSTART_ONCE=true
-ZSH_TMUX_AUTOCONNECT=true
-ZSH_TMUX_FIXTERM_WITH_256COLOR=screen-256color
+#ZSH_TMUX_AUTOSTART_ONCE=true
+#ZSH_TMUX_AUTOCONNECT=true
+#ZSH_TMUX_FIXTERM_WITH_256COLOR=screen-256color
 
 # Skip zplug initialization if it's not available
-[[ -f ~/.local/share/zsh/zplug-init.zsh ]] || return
-source ~/.local/share/zsh/zplug-init.zsh
-
+[[ -f ~/.local/share/zsh/zplug/init.zsh ]] || return
+source ~/.local/share/zsh/zplug/init.zsh
 # ---
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 # ---
+zplug "DFurnes/purer", use:pure.zsh, from:github, as:theme
 zplug "tarruda/zsh-autosuggestions", use:"zsh-autosuggestions.zsh"
 zplug "mafredri/zsh-async", from:github
 zplug "lib/key-bindings", from:oh-my-zsh
@@ -30,12 +30,6 @@ if ! zplug check --verbose; then
   else
     echo
   fi
-fi
-
-if dotfiles::compinit::is_stale 3600; then
-  compinit -d ~/.zplug/zcompdump
-else
-  compinit -C -d ~/.zplug/zcompdump
 fi
 
 # Source plugins && add commands to $PATH

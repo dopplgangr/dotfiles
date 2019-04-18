@@ -1,41 +1,18 @@
-- defaults:
-        link:
-                relink: true
-                create: true
-
-- clean: ['~']
-
-- shell:
-        -
-          command: git submodule update --init --recursive
-          stdin: true
-          stdout: true
-          description: Updating Submodules
-          quiet: true
-
-- link:
-        ~/.config/dircolors: colors/dircolors
-        ~/.config/theme: colors/gruvbox_256palette.sh
-        ~/.config/nvim/init.vim: config/nvim/init.vim
-        ~/.config/htop/htoprc: config/htop/htoprc
-        ~/.config/tmuxinator: config/tmuxinator
-        ~/.config/git: git/
-        ~/.gitconfig: git/gitconfig
-        ~/.gdbinit: gdb/gdbinit
-        ~/.local/share/zsh/init.d: zsh/init.d
-        ~/.local/share/zsh/functions.d: zsh/functions.d
-        ~/.local/share/zsh/completions.d: zsh/completions.d
-        ~/.local/share/zsh/zkbd.d: zsh/zkbd.d
-        ~/.local/share/zsh/dotfile-init.zsh: zsh/init.zsh
-        ~/.local/share/zsh/zplug-init.zsh: zsh/zplug/init.zsh
-        ~/.tmux.conf: tmux.conf
-        ~/.tmux/plugins/tpm : tmux/tpm
-        ~/.vimrc: vimrc
-        ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
-        ~/.zshenv: zshenv
-        ~/.zshrc: zshrc
-
-- shell:
-        - [ mkdir -p ~/.local, Ensuring ~/.local exists ]
-        - [ ./meta/terminfo.sh, Installing local terminfo database ]
-
+- defaults: 
+   link: 
+    create: true
+    relink: true
+- clean: "~"
+- shell: ["git submodule update --init --recursive"]
+- link: 
+   ~/.config: config
+   ~/.gdbinit: config/gdb/gdbinit
+   ~/.gitconfig: config/git/gitconfig
+   ~/.local/share/sh: sh
+   ~/.local/share/zsh: zsh
+   ~/.tmux.conf: tmux.conf
+   ~/.tmux/plugins/tpm: tmux/tpm
+   ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
+   ~/.vimrc: vimrc
+   ~/.zshenv: zshenv
+   ~/.zshrc: zshrc
