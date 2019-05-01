@@ -107,7 +107,7 @@ prompt_control_setup() {
 	ZSH_THEME_GIT_PROMPT_PREFIX=" on %{%G%}%F{white}%f:%F{yellow}"
 	ZSH_THEME_GIT_PROMPT_SUFFIX="%b"
 	ZSH_THEME_GIT_PROMPT_DIRTY=""
-	ZSH_THEME_GIT_PROMPT_CLEAN="%{%F{green}✔%f%G}"
+	ZSH_THEME_GIT_PROMPT_CLEAN="%{%F{green}✔%f%G%}"
 	ZSH_THEME_GIT_PROMPT_ADDED="%{%F{green}+%f%G%}"
 	ZSH_THEME_GIT_PROMPT_MODIFIED="%{%F{blue}~%f%G%}"
 	ZSH_THEME_GIT_PROMPT_DELETED="%{%F{red}-%f%G%}"
