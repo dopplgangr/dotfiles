@@ -11,6 +11,10 @@ export EDITOR="$VISUAL"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
+if [[ -f /etc/environment ]]; then
+	source /etc/environment
+fi
+
 if [[ -f /etc/zshrc ]]; then
 	source /etc/zshrc
 fi
@@ -64,7 +68,7 @@ fpath=(
 
 
 # moved these here so shells have access to them
-DOTFILES_ZSH_FUNCTIONS=~/.local/share/zsh/functions.d
+export DOTFILES_ZSH_FUNCTIONS=~/.local/share/zsh/functions.d
 
 if [[ -d ${DOTFILES_ZSH_FUNCTIONS} ]]; then
   fpath+="${DOTFILES_ZSH_FUNCTIONS}"
@@ -85,15 +89,16 @@ mux() {
 
 alias sudo='/usr/bin/sudo'
 alias tssh='env TERM=screen-256color ssh'
+
 alias edit='nvim'
 alias vi='nvim'
 alias vim='nvim'
-#alias top='htop'
-#alias mux='tmuxinator'
+
 alias ls='ls -h --sort=extension --group-directories-first --color=auto'
 alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
 alias la='ls -hla --sort=extension --group-directories-first --color=auto'
-alias lp="ls -hla --sort=extension --group-directories-first --color=auto | ${PAGER}"
+alias lp='ls -hla --sort=extension --group-directories-first --color=yes | less -R'
+
 alias grep='grep --color=auto'
 alias df="df -Tha --total"
 alias du="du -ach | sort -h"
