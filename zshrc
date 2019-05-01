@@ -15,7 +15,13 @@ if [ -d /opt/bin ]; then
 fi
 
 # Process init directory
-source ~/.local/share/zsh/dotfile-init.zsh
+for file in ~/.local/share/zsh/init.d/*.zsh; source $file
+
+unsetopt beep                                           # Turn off bell noise
+setopt prompt_subst
+setopt inc_append_history
+setopt share_history
+setopt histignorespace
 
 # just in case other scripts have messed up our path orders
 source ~/.zshenv

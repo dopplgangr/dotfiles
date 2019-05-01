@@ -11,6 +11,34 @@ export EDITOR="$VISUAL"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
+if [[ -f /etc/zshrc ]]; then
+	source /etc/zshrc
+fi
+
+# check for intel opt package
+if [[ -d /opt/intel/parallel_studio_xe_2018/ ]]; then
+  source /opt/intel/parallel_studio_xe_2018/psxevars.sh &> /dev/null
+fi
+
+# work hosts
+if [[ "$(hostname)" == "ny4-collector-01" ]]; then
+  export VOLERA_FH_HOME="${HOME}/workspace/SWFeedHandler"
+  export ENV="NY4Dev"
+  export PATH=$PATH:$VOLERA_FH_HOME/bin
+fi
+
+if [[ $(lsb_release -is) == "CentOS" ]]; then
+  # -------------------------------
+  # CentOS specific features
+  # -------------------------------
+
+  # alternative git
+  [[ -f /opt/rh/rh-git29/enable ]] && source /opt/rh/rh-git29/enable
+
+  # alternative gcc
+  [[ -f /opt/rh/devtoolset-7/enable ]] && source /opt/rh/devtoolset-7/enable
+fi
+
 # set up local go env if it exists
 if [ -d ${HOME}/go ]; then 
   GOPATH=$HOME/go
@@ -25,8 +53,19 @@ if [ -d ${HOME}/.gem ]; then
   mkdir -p "$GEM_HOME"
 fi
 
+# Pull in common functionality
+source ~/.local/share/sh/functions.sh
+
+fpath=(
+  ~/.local/share/zsh/functions.d
+  ~/.local/share/sh/functions.sh
+  "${fpath[@]}"
+)
+
+
 # moved these here so shells have access to them
 DOTFILES_ZSH_FUNCTIONS=~/.local/share/zsh/functions.d
+
 if [[ -d ${DOTFILES_ZSH_FUNCTIONS} ]]; then
   fpath+="${DOTFILES_ZSH_FUNCTIONS}"
   for func in ${DOTFILES_ZSH_FUNCTIONS}/_*(N:t); do
@@ -44,6 +83,7 @@ mux() {
   tmuxinator "$@" 2>/dev/null
 }
 
+alias sudo='/usr/bin/sudo'
 alias tssh='env TERM=screen-256color ssh'
 alias edit='nvim'
 alias vi='nvim'
