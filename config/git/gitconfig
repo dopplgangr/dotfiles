@@ -11,7 +11,7 @@
   tool = nvimdiff
 
 [credential]
-	helper = "cache"
+	helper = "cache --timeout 30000"
 
 [alias]
   # status
