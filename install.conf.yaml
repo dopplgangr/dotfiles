@@ -20,5 +20,5 @@
    ~/.config/tmuxinator:
    ~/.local/share/sh: sh
    ~/.local/share/zsh: zsh
-
-- shell: ["if whence pip 2>&1 >/dev/null; then pip install pyyaml 2>&1 > /dev/null; fi"]
+- shell: 
+  - "if whence pip 2>&1 >/dev/null; then pip install pyyaml 2>&1 > /dev/null; fi"
