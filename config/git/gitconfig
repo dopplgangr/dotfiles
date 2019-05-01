@@ -10,6 +10,9 @@
 [diff]
   tool = nvimdiff
 
+[credential]
+	helper = "cache"
+
 [alias]
   # status
   ls           = "!git status -suno"
