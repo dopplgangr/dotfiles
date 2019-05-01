@@ -3,16 +3,22 @@
     create: true
     relink: true
 - clean: "~"
-- shell: ["git submodule update --init --recursive"]
+- shell: 
+  - "git submodule update --init --recursive"
 - link: 
-   ~/.config: config
-   ~/.gdbinit: config/gdb/gdbinit
-   ~/.gitconfig: config/git/gitconfig
-   ~/.local/share/sh: sh
-   ~/.local/share/zsh: zsh
-   ~/.tmux.conf: tmux.conf
+   ~/.gdbinit: gdb/gdbinit
+   ~/.gitconfig: git/gitconfig
+   ~/.tmux.conf:
    ~/.tmux/plugins/tpm: tmux/tpm
    ~/.vim/autoload/plug.vim: vim/autoload/plug.vim
-   ~/.vimrc: vimrc
-   ~/.zshenv: zshenv
-   ~/.zshrc: zshrc
+   ~/.vimrc:
+   ~/.zshenv:
+   ~/.zshrc:
+   ~/.config/gdb:
+   ~/.config/htop:
+   ~/.config/nvim:
+   ~/.config/tmuxinator:
+   ~/.local/share/sh: sh
+   ~/.local/share/zsh: zsh
+
+- shell: ["if whence pip 2>&1 >/dev/null; then pip install pyyaml 2>&1 > /dev/null; fi"]
