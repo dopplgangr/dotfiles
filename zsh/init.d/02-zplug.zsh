@@ -1,4 +1,5 @@
 umask 022
+#[[ -f ~/.config/zsh/zplug/init.zsh ]] || return
 
 # Skip zplug initialization if it's not available
 [[ -f ~/.local/share/zsh/zplug/init.zsh ]] || return
