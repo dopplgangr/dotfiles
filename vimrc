@@ -32,6 +32,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 " - filetypes ----
 Plug 'plasticboy/vim-markdown' " Markdown support
+Plug 'leafgarland/typescript-vim' " typescript support
 Plug 'avakhov/vim-yaml'        " yaml syntax support
 Plug 'chrisbra/vim-zsh'
 

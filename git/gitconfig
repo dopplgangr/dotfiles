@@ -39,14 +39,9 @@
   diff-cached = diff --cached HEAD^
   diff-color  = diff --color
 
-[include]
-  path = ~/.config/git/gitconfig.local 
-
-[includeIf "gitdir:~/projects/"]
-  path = ~/.config/git/gitconfig.home
-
-[includeIf "gitdir:~/workspace/"]
-  path = ~/.config/git/gitconfig.work
+[user]
+	name = dopplgangr
+	email = dopplgangr@gmail.com
 
 [core]
   editor = nvim

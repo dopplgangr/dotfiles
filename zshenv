@@ -11,6 +11,7 @@ export EDITOR="$VISUAL"
 
 export PATH="$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin/:$PATH"
 
+
 if [[ -f /etc/environment ]]; then
 	source /etc/environment
 fi
@@ -41,6 +42,10 @@ if [[ $(lsb_release -is) == "CentOS" ]]; then
 
   # alternative gcc
   [[ -f /opt/rh/devtoolset-7/enable ]] && source /opt/rh/devtoolset-7/enable
+fi
+
+if [[ -d /snap/ ]]; then
+	export PATH="/snap/bin:$PATH"
 fi
 
 # set up local go env if it exists
