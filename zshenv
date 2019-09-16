@@ -103,10 +103,11 @@ alias ls='ls -h --sort=extension --group-directories-first --color=auto'
 alias ll='ls -hl --sort=extension --group-directories-first --color=auto'
 alias la='ls -hla --sort=extension --group-directories-first --color=auto'
 alias lp='ls -hla --sort=extension --group-directories-first --color=yes | less -R'
+alias mdb='mongo -u $USER -p --authenticationDatabase admin'
 
 alias grep='grep --color=auto'
 alias df="df -Tha --total"
-alias du="du -ach | sort -h"
+alias du="du -ach"
 alias free="free -mt"
 alias ps="ps auxf"
 
